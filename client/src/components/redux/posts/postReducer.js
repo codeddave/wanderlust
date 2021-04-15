@@ -11,5 +11,7 @@ export const postReducer = (state = INITIAL_STATE, action) => {
         ...state,
         posts: action.payload,
       };
+    default:
+      return state;
   }
 };
