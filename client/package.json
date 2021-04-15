@@ -2,6 +2,7 @@
   "name": "wanderlust",
   "version": "0.1.0",
   "private": true,
+  "proxy":"http://localhost:5006",
   "dependencies": {
     "@chakra-ui/react": "^1.5.0",
     "@emotion/react": "^11.1.5",
