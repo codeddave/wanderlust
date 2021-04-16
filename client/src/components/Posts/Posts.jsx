@@ -24,6 +24,7 @@ const Posts = () => {
               key={post._id}
               createdAt={post.createdAt}
               image={post.selectedFile}
+              likes={post.likeCount}
             />
           ))}
         </Grid>
