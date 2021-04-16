@@ -9,3 +9,12 @@ export const fetchPosts = async () => {
     console.log(error.message);
   }
 };
+
+export const createPostApi = async (post) => {
+  try {
+    const res = await axios.post(url, post);
+    return res.data;
+  } catch (error) {
+    console.log(error.message);
+  }
+};

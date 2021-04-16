@@ -9,15 +9,23 @@ import {
   Button,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import FileBase from "react-file-base64";
+import { createPostStartAsync } from "../redux/posts/postActions";
 //create post
 const NewPost = () => {
+  const dispatch = useDispatch();
   const [postData, setPostData] = useState({
     creator: "",
     description: "",
     selectedFile: "",
     title: "",
+    tags: "",
   });
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(createPostStartAsync(postData));
+  };
   return (
     <div>
       <Box
@@ -28,6 +36,7 @@ const NewPost = () => {
         mt="20"
         mb="20"
         as="form"
+        onSubmit={handleSubmit}
       >
         <FormControl id="creator">
           <FormLabel htmlFor="creator">Creator</FormLabel>
@@ -40,7 +49,7 @@ const NewPost = () => {
             value={postData.creator}
           />
         </FormControl>
-        <FormControl id="text">
+        <FormControl id="title">
           <FormLabel htmlFor="title">Title</FormLabel>
           <Input
             type="text"
@@ -61,6 +70,16 @@ const NewPost = () => {
             }
             value={postData.description}
           />
+        </FormControl>
+        <FormControl id="tags">
+          <FormLabel htmlFor="tags">Tags</FormLabel>
+          <Input
+            type="text"
+            id="tags"
+            onChange={(e) => setPostData({ ...postData, tags: e.target.value })}
+            value={postData.tags}
+          />
+          <FormHelperText>We'll never share your email.</FormHelperText>
         </FormControl>
         <Box ml="2">
           <FileBase

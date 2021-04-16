@@ -1,7 +1,7 @@
 import { postActionTypes } from "./postActionTypes";
 
 const INITIAL_STATE = {
-  posts: null,
+  posts: [],
 };
 
 export const postReducer = (state = INITIAL_STATE, action) => {
@@ -10,6 +10,11 @@ export const postReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         posts: action.payload,
+      };
+    case postActionTypes.CREATE_POST:
+      return {
+        ...state,
+        posts: [...state.posts, action.payload],
       };
     default:
       return state;
