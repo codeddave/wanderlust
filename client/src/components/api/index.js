@@ -18,3 +18,11 @@ export const createPostApi = async (post) => {
     console.log(error.message);
   }
 };
+export const updatePostApi = async (id, post) => {
+  try {
+    const res = await axios.patch(`${url}/${id}`, post);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+  }
+};

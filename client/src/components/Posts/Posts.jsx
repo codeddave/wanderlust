@@ -3,14 +3,13 @@ import PostCard from "../PostCard/PostCard";
 import { useDispatch, useSelector } from "react-redux";
 import { getPostsStartAsync } from "../redux/posts/postActions";
 import { Grid, GridItem } from "@chakra-ui/react";
-const Posts = () => {
+const Posts = ({ setCurrentId }) => {
   const posts = useSelector((state) => state.post.posts);
 
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getPostsStartAsync());
   }, []);
-  console.log(posts);
   return (
     <>
       {posts.length < 1 ? (
@@ -25,6 +24,8 @@ const Posts = () => {
               createdAt={post.createdAt}
               image={post.selectedFile}
               likes={post.likeCount}
+              id={post._id}
+              setCurrentId={setCurrentId}
             />
           ))}
         </Grid>

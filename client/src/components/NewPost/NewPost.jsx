@@ -8,13 +8,22 @@ import {
   Textarea,
   Button,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import FileBase from "react-file-base64";
-import { createPostStartAsync } from "../redux/posts/postActions";
+import {
+  createPostStartAsync,
+  updatePostStartAsync,
+} from "../redux/posts/postActions";
 //create post
-const NewPost = () => {
+const NewPost = ({ setCurrentId, currentId }) => {
+  const posts = useSelector((state) => state.post.posts);
   const dispatch = useDispatch();
+  console.log(currentId);
+  const postToUpdate = currentId
+    ? posts.find((post) => post._id === currentId)
+    : null;
+
   const [postData, setPostData] = useState({
     creator: "",
     description: "",
@@ -22,9 +31,27 @@ const NewPost = () => {
     title: "",
     tags: "",
   });
+
+  useEffect(() => {
+    if (postToUpdate) setPostData(postToUpdate);
+    console.log(postToUpdate + "hksfvkablbla");
+  }, [postToUpdate]);
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(createPostStartAsync(postData));
+    if (currentId) {
+      dispatch(updatePostStartAsync(currentId, postData));
+    } else {
+      dispatch(createPostStartAsync(postData));
+    }
+    setCurrentId(null);
+    setPostData({
+      creator: "",
+      description: "",
+      selectedFile: "",
+      title: "",
+      tags: "",
+    });
+    /*   ; */
   };
   return (
     <div>
@@ -38,6 +65,9 @@ const NewPost = () => {
         as="form"
         onSubmit={handleSubmit}
       >
+        <Box as="p" textAlign="center">
+          {currentId ? "Edit" : "Create"} a Memory{" "}
+        </Box>
         <FormControl id="creator">
           <FormLabel htmlFor="creator">Creator</FormLabel>
           <Input
