@@ -2,14 +2,14 @@ import React, { useEffect } from "react";
 import PostCard from "../PostCard/PostCard";
 import { useDispatch, useSelector } from "react-redux";
 import { getPostsStartAsync } from "../redux/posts/postActions";
-import { Grid, GridItem } from "@chakra-ui/react";
+import { Grid } from "@chakra-ui/react";
 const Posts = ({ setCurrentId }) => {
   const posts = useSelector((state) => state.post.posts);
 
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getPostsStartAsync());
-  }, []);
+  }, [dispatch]);
   return (
     <>
       {posts.length < 1 ? (

@@ -2,9 +2,9 @@ import { Box } from "@chakra-ui/layout";
 import {
   FormControl,
   FormLabel,
-  FormErrorMessage,
+  //FormErrorMessage,
   Input,
-  FormHelperText,
+  //FormHelperText,
   Textarea,
   Button,
 } from "@chakra-ui/react";

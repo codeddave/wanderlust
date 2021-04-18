@@ -77,11 +77,11 @@ const PostCard = ({
             <p>{moment(createdAt).fromNow()}</p>
           </Box>
         </Box>
-        {/*   <Box>
+        <Box>
           <RiDeleteBin5Fill
             onClick={() => dispatch(deletePostStartAsync(id))}
           />
-        </Box> */}
+        </Box>
       </Box>
     </Box>
   );
