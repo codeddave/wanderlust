@@ -89,7 +89,6 @@ const NewPost = ({ setCurrentId, currentId }) => {
             }
             value={postData.title}
           />
-          <FormHelperText>We'll never share your email.</FormHelperText>
         </FormControl>
         <FormControl id="description" mt="6">
           <FormLabel htmlFor="description">Description</FormLabel>
@@ -106,10 +105,11 @@ const NewPost = ({ setCurrentId, currentId }) => {
           <Input
             type="text"
             id="tags"
-            onChange={(e) => setPostData({ ...postData, tags: e.target.value })}
+            onChange={(e) =>
+              setPostData({ ...postData, tags: e.target.value.split(",") })
+            }
             value={postData.tags}
           />
-          <FormHelperText>We'll never share your email.</FormHelperText>
         </FormControl>
         <Box ml="2">
           <FileBase

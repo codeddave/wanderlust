@@ -63,7 +63,7 @@ const likePost = async (req, res) => {
   } catch (error) {
     console.log(error.message);
   }
-  const post = findById(_id);
+  const post = await Post.findById(_id);
   try {
     const likedPost = await Post.findByIdAndUpdate(
       _id,

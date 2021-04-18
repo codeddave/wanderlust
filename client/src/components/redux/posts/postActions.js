@@ -3,6 +3,7 @@ import {
   createPostApi,
   updatePostApi,
   deletePostApi,
+  likePostApi,
 } from "../../api";
 
 const { postActionTypes } = require("./postActionTypes");
@@ -25,6 +26,12 @@ export const deletePost = (id) => ({
   type: postActionTypes.DELETE_POST,
   payload: id,
 });
+
+export const likePost = (likedPost) => ({
+  type: postActionTypes.LIKE_POST,
+  payload: likedPost,
+});
+
 export const getPostsStartAsync = () => {
   return async (dispatch) => {
     try {
@@ -66,6 +73,18 @@ export const deletePostStartAsync = (id) => {
       dispatch(deletePost(id));
     } catch (error) {
       console.log(error);
+    }
+  };
+};
+
+export const likePostStartAsync = (id) => {
+  return async (dispatch) => {
+    try {
+      const likedPost = await likePostApi(id);
+
+      dispatch(likePost(likedPost));
+    } catch (error) {
+      console.log(error.message);
     }
   };
 };

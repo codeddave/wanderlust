@@ -34,3 +34,12 @@ export const deletePostApi = async (id) => {
     console.log(error);
   }
 };
+
+export const likePostApi = async (id) => {
+  try {
+    const res = await axios.patch(`${url}/${id}/likePost`);
+    return res.data;
+  } catch (error) {
+    console.log(error.message);
+  }
+};
