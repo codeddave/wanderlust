@@ -23,6 +23,11 @@ export const postReducer = (state = INITIAL_STATE, action) => {
           post._id === action.payload._id ? action.payload : post
         ),
       };
+    case postActionTypes.DELETE_POST:
+      return {
+        ...state,
+        posts: state.posts.filter((post) => post._id !== action.payload),
+      };
     default:
       return state;
   }

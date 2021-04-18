@@ -3,6 +3,9 @@ import { Box, Image } from "@chakra-ui/react";
 import moment from "moment";
 import { MdThumbUp } from "react-icons/md";
 import { MdEdit } from "react-icons/md";
+import { RiDeleteBin5Fill } from "react-icons/ri";
+import { deletePostStartAsync } from "../redux/posts/postActions";
+import { useDispatch } from "react-redux";
 
 const PostCard = ({
   title,
@@ -13,6 +16,7 @@ const PostCard = ({
   likes,
   setCurrentId,
 }) => {
+  const dispatch = useDispatch();
   return (
     <Box maxW="xs" borderWidth="1px" borderRadius="lg" overflow="hidden">
       <Box d="flex" justifyContent="flex-end" mt="2" mr="2">
@@ -43,6 +47,11 @@ const PostCard = ({
             </Box>
             <p>{moment(createdAt).fromNow()}</p>
           </Box>
+        </Box>
+        <Box>
+          <RiDeleteBin5Fill
+            onClick={() => dispatch(deletePostStartAsync(id))}
+          />
         </Box>
       </Box>
     </Box>

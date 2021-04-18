@@ -26,3 +26,11 @@ export const updatePostApi = async (id, post) => {
     console.log(error);
   }
 };
+
+export const deletePostApi = async (id) => {
+  try {
+    await axios.delete(`${url}/${id}`);
+  } catch (error) {
+    console.log(error);
+  }
+};

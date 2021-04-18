@@ -1,4 +1,9 @@
-import { fetchPosts, createPostApi, updatePostApi } from "../../api";
+import {
+  fetchPosts,
+  createPostApi,
+  updatePostApi,
+  deletePostApi,
+} from "../../api";
 
 const { postActionTypes } = require("./postActionTypes");
 
@@ -14,6 +19,11 @@ export const createPost = (post) => ({
 export const updatePost = (post) => ({
   type: postActionTypes.UPDATE_POST,
   payload: post,
+});
+
+export const deletePost = (id) => ({
+  type: postActionTypes.DELETE_POST,
+  payload: id,
 });
 export const getPostsStartAsync = () => {
   return async (dispatch) => {
@@ -45,6 +55,17 @@ export const updatePostStartAsync = (id, post) => {
       dispatch(updatePost(data));
     } catch (error) {
       console.log(error.message);
+    }
+  };
+};
+
+export const deletePostStartAsync = (id) => {
+  return async (dispatch) => {
+    try {
+      await deletePostApi(id);
+      dispatch(deletePost(id));
+    } catch (error) {
+      console.log(error);
     }
   };
 };
