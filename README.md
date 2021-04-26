@@ -6,8 +6,8 @@ Wanderlust is a simple MERN application where users get to share memorable trave
 
 ## Technologies Used
 
-React
-ChakraUI
-MongoDB
-Express
-Node
+* React
+* ChakraUI
+* MongoDB
+* Express
+* Node
