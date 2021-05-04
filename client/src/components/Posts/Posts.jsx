@@ -15,7 +15,14 @@ const Posts = ({ setCurrentId }) => {
       {posts.length < 1 ? (
         <p>Loading..</p>
       ) : (
-        <Grid templateColumns="repeat(4, 1fr)" gap={4}>
+        <Grid
+          templateColumns={[
+            "repeat(1, 1fr)",
+            "repeat(1, 1fr)",
+            "repeat(4, 1fr)",
+          ]}
+          gap={4}
+        >
           {posts.map((post) => (
             <PostCard
               title={post.title}

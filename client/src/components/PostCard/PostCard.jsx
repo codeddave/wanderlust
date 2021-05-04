@@ -42,8 +42,14 @@ const PostCard = ({
       </Box>
       <Box>
         <Box d="flex" justifyContent="flex-end" mt="2" mr="2">
-          <MdEdit onClick={() => setCurrentId(id)} />
+          <Box mr="4">
+            <MdEdit onClick={() => setCurrentId(id)} mr="6" />
+          </Box>
+          <RiDeleteBin5Fill
+            onClick={() => dispatch(deletePostStartAsync(id))}
+          />
         </Box>
+
         <Image src={image} h="44" w="full" objectFit="cover" p="4" />
       </Box>
 
@@ -76,11 +82,6 @@ const PostCard = ({
             </Box>
             <p>{moment(createdAt).fromNow()}</p>
           </Box>
-        </Box>
-        <Box>
-          <RiDeleteBin5Fill
-            onClick={() => dispatch(deletePostStartAsync(id))}
-          />
         </Box>
       </Box>
     </Box>
