@@ -1,22 +1,49 @@
+import { Button } from "@chakra-ui/button";
 import { FormControl, FormLabel } from "@chakra-ui/form-control";
-import { Input } from "@chakra-ui/input";
+import { Input, InputGroup, InputRightAddon } from "@chakra-ui/input";
 import { Box } from "@chakra-ui/layout";
 import React, { useState } from "react";
-
+import { MdVisibility, MdVisibilityOff } from "react-icons/md";
 const Auth = () => {
   const [isSignUp, setIsSignUp] = useState(true);
-
+  const [showPassword, setShowPassword] = useState(false);
+  const handlePasswordVisibility = () => {
+    setShowPassword((prevState) => !prevState);
+  };
   return (
     <div>
-      <Box>
-        <FormControl>
-          <FormLabel> Name</FormLabel>
-          <Input type="text" placeholder="Name" name="name" />
-        </FormControl>
-        <FormControl>
-          <FormLabel> Email</FormLabel>
-          <Input type="text" placeholder="Email" name="password" />
-        </FormControl>
+      <Box
+        d="flex"
+        flexDirection="column"
+        justifyContent="center"
+        alignItems="center"
+      >
+        <Box as="form" maxW="sm" width="xs" borderRadius="lg" overflow="hidden">
+          <FormControl>
+            <FormLabel> Name</FormLabel>
+            <Input type="text" placeholder="Name" name="name" />
+          </FormControl>
+          <FormControl>
+            <FormLabel> Email</FormLabel>
+            <Input type="text" placeholder="Email" name="password" />
+          </FormControl>
+          <FormControl>
+            <FormLabel> Password</FormLabel>
+            <InputGroup>
+              <Input
+                type={showPassword ? "text" : "password"}
+                placeholder="Password"
+                name="password"
+              />
+
+              <InputRightAddon
+                children={showPassword ? <MdVisibilityOff /> : <MdVisibility />}
+                onClick={handlePasswordVisibility}
+              />
+            </InputGroup>
+          </FormControl>
+          <Button>Sign Up</Button>
+        </Box>
       </Box>
     </div>
   );
