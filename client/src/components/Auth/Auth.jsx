@@ -10,6 +10,7 @@ const Auth = () => {
   const handlePasswordVisibility = () => {
     setShowPassword((prevState) => !prevState);
   };
+
   return (
     <div>
       <Box
@@ -18,11 +19,21 @@ const Auth = () => {
         justifyContent="center"
         alignItems="center"
       >
-        <Box as="form" maxW="sm" width="xs" borderRadius="lg" overflow="hidden">
-          <FormControl>
-            <FormLabel> Name</FormLabel>
-            <Input type="text" placeholder="Name" name="name" />
-          </FormControl>
+        <Box
+          as="form"
+          maxW="sm"
+          width="xs"
+          borderRadius="lg"
+          overflow="hidden"
+          p="4"
+        >
+          {isSignUp ? (
+            <FormControl>
+              <FormLabel> Name</FormLabel>
+              <Input type="text" placeholder="Name" name="name" />
+            </FormControl>
+          ) : null}
+
           <FormControl>
             <FormLabel> Email</FormLabel>
             <Input type="text" placeholder="Email" name="password" />
@@ -42,7 +53,16 @@ const Auth = () => {
               />
             </InputGroup>
           </FormControl>
-          <Button>Sign Up</Button>
+
+          <Button>{isSignUp ? "Sign Up" : "Sign In"}</Button>
+
+          <Box as="p">
+            {" "}
+            Are you already a member?{" "}
+            <Box as="button" onClick={() => setIsSignUp(false)} type="button">
+              Sign In
+            </Box>
+          </Box>
         </Box>
       </Box>
     </div>
