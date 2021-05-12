@@ -1,6 +1,7 @@
 const Post = require("../models/post");
 const mongoose = require("mongoose");
 const { findById } = require("../models/post");
+const HttpError = require("../models/http-error");
 const getPosts = async (req, res) => {
   try {
     const posts = await Post.find();
@@ -56,6 +57,7 @@ const deletePost = async (req, res) => {
 
 const likePost = async (req, res) => {
   const { id: _id } = req.params;
+  if (!req.userId) return next(new HttpError("User unauthenticated", 400));
   try {
     if (!mongoose.Types.ObjectId.isValid(_id)) {
       return res.status(404).send("No post with that id");
@@ -64,12 +66,16 @@ const likePost = async (req, res) => {
     console.log(error.message);
   }
   const post = await Post.findById(_id);
+  const index = post.likes.findIndex((id) => id === String(req.userId));
+  if (index === -1) {
+    //like the post
+    post.likes.push(req.userId);
+  } else {
+    //dislike post
+    post.likes = post.likes.filter((id) => id !== String(req.userId));
+  }
   try {
-    const likedPost = await Post.findByIdAndUpdate(
-      _id,
-      { likeCount: post.likeCount + 1 },
-      { new: true }
-    );
+    const likedPost = await Post.findByIdAndUpdate(_id, post, { new: true });
     res.json(likedPost);
   } catch (error) {
     console.log(error.message);
