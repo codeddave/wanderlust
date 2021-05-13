@@ -3,8 +3,10 @@ const bcrypt = require("bcryptjs");
 const HttpError = require("../models/http-error");
 const jwt = require("jsonwebtoken");
 
-const signUp = async (req, res) => {
+const signUp = async (req, res, next) => {
   const { email, name, password } = req.body;
+  console.log(req.body);
+  console.log(email);
   try {
     const existingUser = await User.findOne({ email });
     if (existingUser)
@@ -17,11 +19,11 @@ const signUp = async (req, res) => {
       process.env.ACCESS_TOKEN_SECRET,
       { expiresIn: "1hr" }
     );
-
+    console.log(user + "uhdvdibadbkbjk b");
     res.status(200).json({ user, token });
   } catch (error) {
     const err = new HttpError(
-      "Signing in failed, please try again later.",
+      "Signing up failed, please try again later.",
       500
     );
     return next(err);

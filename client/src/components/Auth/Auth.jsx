@@ -4,13 +4,28 @@ import { Input, InputGroup, InputRightAddon } from "@chakra-ui/input";
 import { Box } from "@chakra-ui/layout";
 import React, { useState } from "react";
 import { MdVisibility, MdVisibilityOff } from "react-icons/md";
+import { useDispatch } from "react-redux";
+import { signUpStartAsync } from "../redux/auth/userActions";
 const Auth = () => {
+  const dispatch = useDispatch();
   const [isSignUp, setIsSignUp] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
   const handlePasswordVisibility = () => {
     setShowPassword((prevState) => !prevState);
   };
-
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+    console.log(formData);
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(signUpStartAsync(formData));
+  };
   return (
     <div>
       <Box
@@ -26,17 +41,30 @@ const Auth = () => {
           borderRadius="lg"
           overflow="hidden"
           p="4"
+          onSubmit={handleSubmit}
         >
           {isSignUp ? (
             <FormControl>
               <FormLabel> Name</FormLabel>
-              <Input type="text" placeholder="Name" name="name" />
+              <Input
+                type="text"
+                placeholder="Name"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+              />
             </FormControl>
           ) : null}
 
           <FormControl>
             <FormLabel> Email</FormLabel>
-            <Input type="text" placeholder="Email" name="password" />
+            <Input
+              type="text"
+              placeholder="Email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+            />
           </FormControl>
           <FormControl>
             <FormLabel> Password</FormLabel>
@@ -45,6 +73,8 @@ const Auth = () => {
                 type={showPassword ? "text" : "password"}
                 placeholder="Password"
                 name="password"
+                value={formData.password}
+                onChange={handleChange}
               />
 
               <InputRightAddon
@@ -54,7 +84,7 @@ const Auth = () => {
             </InputGroup>
           </FormControl>
 
-          <Button>{isSignUp ? "Sign Up" : "Sign In"}</Button>
+          <Button type="submit">{isSignUp ? "Sign Up" : "Sign In"}</Button>
 
           <Box as="p">
             {" "}

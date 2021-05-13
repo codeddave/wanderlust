@@ -4,7 +4,7 @@ import {
   updatePostApi,
   deletePostApi,
   likePostApi,
-} from "../../api";
+} from "../../api/posts.js";
 
 const { postActionTypes } = require("./postActionTypes");
 

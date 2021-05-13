@@ -30,11 +30,11 @@ export const signInFailure = (error) => ({
   payload: error,
 });
 
-export const signUpStartAsync = (userData) => {
-  return (dispatch) => {
+export const signUpStartAsync = (user) => {
+  return async (dispatch) => {
     dispatch(signUpStart());
     try {
-      const userData = await signUp(userData);
+      const userData = await signUp(user);
       dispatch(signUpSuccess(userData));
     } catch (error) {
       dispatch(signUpFailure());

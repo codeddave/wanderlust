@@ -10,12 +10,11 @@ const auth = (req, res, next) => {
 
     if (token && isCustomAuth) {
       decodedData = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
-
-      req.userId = decodedData?.id;
+      req.userId = decodedData.id;
     } else {
       decodedData = jwt.verify(token);
 
-      req.userId = decodedData?.sub; //for google; differentiates users by this id
+      req.userId = decodedData.sub; //for google; differentiates users by this id
     }
     next();
   } catch (error) {
