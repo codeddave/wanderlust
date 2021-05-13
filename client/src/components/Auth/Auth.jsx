@@ -26,6 +26,11 @@ const Auth = () => {
     e.preventDefault();
     dispatch(signUpStartAsync(formData));
   };
+  const handleSwitchMode = () => {
+    setIsSignUp(!isSignUp);
+    setFormData({ name: "", email: "", password: "" });
+    setShowPassword(false);
+  };
   return (
     <div>
       <Box
@@ -88,9 +93,11 @@ const Auth = () => {
 
           <Box as="p">
             {" "}
-            Are you already a member?{" "}
-            <Box as="button" onClick={() => setIsSignUp(false)} type="button">
-              Sign In
+            {isSignUp
+              ? "Are you already a member?"
+              : "Don't have an account yet?"}{" "}
+            <Box as="button" onClick={handleSwitchMode} type="button">
+              {isSignUp ? "Sign In" : "Sign Up"}
             </Box>
           </Box>
         </Box>

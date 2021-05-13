@@ -10,3 +10,12 @@ export const signUp = async (userData) => {
     console.log(error.message);
   }
 };
+
+export const signIn = async (userData) => {
+  try {
+    const res = await axios.post(`${url}/user/signIn`, userData);
+    return res.data;
+  } catch (error) {
+    console.log(error.message);
+  }
+};

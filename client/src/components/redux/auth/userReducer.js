@@ -9,7 +9,6 @@ export const userReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case userActionTypes.SIGN_IN_SUCCESS:
     case userActionTypes.SIGN_UP_SUCCESS:
-      localStorage.setItem("userData", JSON.stringify({ ...action.payload }));
       return {
         ...state,
         userData: action.payload,
@@ -21,6 +20,12 @@ export const userReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         error: null,
+      };
+    case userActionTypes.SIGNOUT:
+      return {
+        ...state,
+        userData: null,
+        user: null,
       };
     default:
       return state;

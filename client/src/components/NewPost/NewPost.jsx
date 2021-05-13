@@ -15,6 +15,7 @@ import {
   createPostStartAsync,
   updatePostStartAsync,
 } from "../redux/posts/postActions";
+import { signOut } from "../redux/auth/userActions";
 //create post
 const NewPost = ({ setCurrentId, currentId }) => {
   const posts = useSelector((state) => state.post.posts);
@@ -123,6 +124,7 @@ const NewPost = ({ setCurrentId, currentId }) => {
         <Button colorScheme="teal" mt="4" type="submit">
           Submit
         </Button>
+        <Button onClick={() => dispatch(signOut())}>Logout</Button>
       </Box>
     </div>
   );

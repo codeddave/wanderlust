@@ -29,6 +29,9 @@ export const signInFailure = (error) => ({
   type: userActionTypes.SIGN_IN_SUCCESS,
   payload: error,
 });
+export const signOut = (error) => ({
+  type: userActionTypes.SIGNOUT,
+});
 
 export const signUpStartAsync = (user) => {
   return async (dispatch) => {
