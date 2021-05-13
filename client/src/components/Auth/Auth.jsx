@@ -5,7 +5,7 @@ import { Box } from "@chakra-ui/layout";
 import React, { useState } from "react";
 import { MdVisibility, MdVisibilityOff } from "react-icons/md";
 import { useDispatch } from "react-redux";
-import { signUpStartAsync } from "../redux/auth/userActions";
+import { signInStartAsync, signUpStartAsync } from "../redux/auth/userActions";
 const Auth = () => {
   const dispatch = useDispatch();
   const [isSignUp, setIsSignUp] = useState(true);
@@ -24,7 +24,12 @@ const Auth = () => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(signUpStartAsync(formData));
+
+    if (isSignUp) {
+      dispatch(signUpStartAsync(formData));
+    } else {
+      dispatch(signInStartAsync(formData));
+    }
   };
   const handleSwitchMode = () => {
     setIsSignUp(!isSignUp);

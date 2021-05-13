@@ -30,7 +30,7 @@ const Posts = ({ setCurrentId }) => {
               key={post._id}
               createdAt={post.createdAt}
               image={post.selectedFile}
-              likes={post.likeCount}
+              likes={post.likes}
               id={post._id}
               setCurrentId={setCurrentId}
               creator={post.creator}

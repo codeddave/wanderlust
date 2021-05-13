@@ -8,7 +8,7 @@ import {
   deletePostStartAsync,
   likePostStartAsync,
 } from "../redux/posts/postActions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const PostCard = ({
   title,
@@ -22,6 +22,7 @@ const PostCard = ({
   tags,
 }) => {
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.user.user);
   return (
     <Box
       maxW="xs"
@@ -37,18 +38,20 @@ const PostCard = ({
     >
       <Box position="absolute" pl="6">
         <Box as="p" mt="1" fontWeight="semibold" top="1">
-          {creator}
+          {user.name}
         </Box>
       </Box>
       <Box>
-        <Box d="flex" justifyContent="flex-end" mt="2" mr="2">
-          <Box mr="4">
-            <MdEdit onClick={() => setCurrentId(id)} mr="6" />
+        {user._id === creator ? (
+          <Box d="flex" justifyContent="flex-end" mt="2" mr="2">
+            <Box mr="4">
+              <MdEdit onClick={() => setCurrentId(id)} mr="6" />
+            </Box>
+            <RiDeleteBin5Fill
+              onClick={() => dispatch(deletePostStartAsync(id))}
+            />
           </Box>
-          <RiDeleteBin5Fill
-            onClick={() => dispatch(deletePostStartAsync(id))}
-          />
-        </Box>
+        ) : null}
 
         <Image src={image} h="44" w="full" objectFit="cover" p="4" />
       </Box>
@@ -77,7 +80,7 @@ const PostCard = ({
                 onClick={() => dispatch(likePostStartAsync(id))}
               />{" "}
               <Box as="p" ml="2">
-                likes {likes}
+                likes {likes.length}
               </Box>
             </Box>
             <p>{moment(createdAt).fromNow()}</p>

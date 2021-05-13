@@ -1,4 +1,4 @@
-import { signUp } from "../../api/auth";
+import { signIn, signUp } from "../../api/auth";
 
 const { userActionTypes } = require("./userActionTypes");
 
@@ -41,6 +41,18 @@ export const signUpStartAsync = (user) => {
       dispatch(signUpSuccess(userData));
     } catch (error) {
       dispatch(signUpFailure());
+    }
+  };
+};
+
+export const signInStartAsync = (user) => {
+  return async (dispatch) => {
+    dispatch(signInStart());
+    try {
+      const userData = await signIn(user);
+      dispatch(signInSuccess(userData));
+    } catch (error) {
+      dispatch(signInFailure());
     }
   };
 };

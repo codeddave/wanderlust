@@ -5,6 +5,7 @@ const postSchema = new Schema ({}) */
 const postSchema = mongoose.Schema({
   title: String,
   description: String,
+  name: String,
   creator: String,
   tags: [String],
   selectedFile: String,

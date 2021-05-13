@@ -26,7 +26,6 @@ const NewPost = ({ setCurrentId, currentId }) => {
     : null;
 
   const [postData, setPostData] = useState({
-    creator: "",
     description: "",
     selectedFile: "",
     title: "",
@@ -35,7 +34,6 @@ const NewPost = ({ setCurrentId, currentId }) => {
 
   useEffect(() => {
     if (postToUpdate) setPostData(postToUpdate);
-    console.log(postToUpdate + "hksfvkablbla");
   }, [postToUpdate]);
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -46,7 +44,6 @@ const NewPost = ({ setCurrentId, currentId }) => {
     }
     setCurrentId(null);
     setPostData({
-      creator: "",
       description: "",
       selectedFile: "",
       title: "",
@@ -69,17 +66,7 @@ const NewPost = ({ setCurrentId, currentId }) => {
         <Box as="p" textAlign="center">
           {currentId ? "Edit" : "Create"} a Memory{" "}
         </Box>
-        <FormControl id="creator">
-          <FormLabel htmlFor="creator">Creator</FormLabel>
-          <Input
-            type="text"
-            id="creator"
-            onChange={(e) =>
-              setPostData({ ...postData, creator: e.target.value })
-            }
-            value={postData.creator}
-          />
-        </FormControl>
+
         <FormControl id="title">
           <FormLabel htmlFor="title">Title</FormLabel>
           <Input
