@@ -5,9 +5,11 @@ import { Box } from "@chakra-ui/layout";
 import React, { useState } from "react";
 import { MdVisibility, MdVisibilityOff } from "react-icons/md";
 import { useDispatch } from "react-redux";
+import { useHistory } from "react-router";
 import { signInStartAsync, signUpStartAsync } from "../redux/auth/userActions";
 const Auth = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const [isSignUp, setIsSignUp] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
@@ -30,6 +32,7 @@ const Auth = () => {
     } else {
       dispatch(signInStartAsync(formData));
     }
+    history.push("/");
   };
   const handleSwitchMode = () => {
     setIsSignUp(!isSignUp);

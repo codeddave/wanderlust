@@ -35,6 +35,7 @@ const Posts = ({ setCurrentId }) => {
               setCurrentId={setCurrentId}
               creator={post.creator}
               tags={post.tags}
+              name={post.name}
             />
           ))}
         </Grid>

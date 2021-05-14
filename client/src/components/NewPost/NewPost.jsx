@@ -20,6 +20,8 @@ import { signOut } from "../redux/auth/userActions";
 const NewPost = ({ setCurrentId, currentId }) => {
   const posts = useSelector((state) => state.post.posts);
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.user.user);
+
   console.log(currentId);
   const postToUpdate = currentId
     ? posts.find((post) => post._id === currentId)
@@ -40,7 +42,7 @@ const NewPost = ({ setCurrentId, currentId }) => {
     if (currentId) {
       dispatch(updatePostStartAsync(currentId, postData));
     } else {
-      dispatch(createPostStartAsync(postData));
+      dispatch(createPostStartAsync({ ...postData, name: user.name }));
     }
     setCurrentId(null);
     setPostData({

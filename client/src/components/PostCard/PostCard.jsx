@@ -4,6 +4,8 @@ import moment from "moment";
 import { MdThumbUp } from "react-icons/md";
 import { MdEdit } from "react-icons/md";
 import { RiDeleteBin5Fill } from "react-icons/ri";
+import { RiThumbUpLine } from "react-icons/ri";
+import { RiThumbUpFill } from "react-icons/ri";
 import {
   deletePostStartAsync,
   likePostStartAsync,
@@ -20,9 +22,42 @@ const PostCard = ({
   setCurrentId,
   creator,
   tags,
+  name,
 }) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
+  const handleLikes = () => {
+    if (likes.length > 0) {
+      const userLiked = likes.find((like) => like === creator);
+      return userLiked ? (
+        <>
+          <RiThumbUpFill />
+
+          <Box>
+            {" "}
+            {likes.length > 2
+              ? `You and ${likes.length - 1} others`
+              : `${likes.length} like${likes.length > 1 ? "s" : ""}`}
+          </Box>
+        </>
+      ) : (
+        <>
+          <RiThumbUpLine />
+          <Box>
+            {likes.length} {likes.length === 1 ? "Like" : "Likes"}
+          </Box>
+        </>
+      );
+    }
+
+    return (
+      <>
+        {" "}
+        <RiThumbUpLine />
+        <Box>Like</Box>{" "}
+      </>
+    );
+  };
   return (
     <Box
       maxW="xs"
@@ -38,11 +73,11 @@ const PostCard = ({
     >
       <Box position="absolute" pl="6">
         <Box as="p" mt="1" fontWeight="semibold" top="1">
-          {user.name}
+          {name}
         </Box>
       </Box>
       <Box>
-        {user._id === creator ? (
+        {user?._id === creator ? (
           <Box d="flex" justifyContent="flex-end" mt="2" mr="2">
             <Box mr="4">
               <MdEdit onClick={() => setCurrentId(id)} mr="6" />
@@ -75,12 +110,12 @@ const PostCard = ({
             alignItems="center"
           >
             <Box d="flex" alignItems="center" justifyContent="">
-              <MdThumbUp
-                mr="2"
+              <Box
+                as="button"
+                ml="2"
                 onClick={() => dispatch(likePostStartAsync(id))}
-              />{" "}
-              <Box as="p" ml="2">
-                likes {likes.length}
+              >
+                {handleLikes()}
               </Box>
             </Box>
             <p>{moment(createdAt).fromNow()}</p>

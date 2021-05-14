@@ -11,7 +11,14 @@ function Home() {
   return (
     <div className="Home">
       <Box d="flex" flexDirection="column" alignItems="center">
-        <NewPost currentId={currentId} setCurrentId={setCurrentId} />
+        {user ? (
+          <NewPost currentId={currentId} setCurrentId={setCurrentId} />
+        ) : (
+          <Box as="p" marginY="40">
+            {" "}
+            Please Sign In to create your memories.
+          </Box>
+        )}
         <Posts setCurrentId={setCurrentId} />
       </Box>
     </div>
