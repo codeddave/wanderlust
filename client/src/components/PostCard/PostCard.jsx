@@ -28,10 +28,14 @@ const PostCard = ({
   const user = useSelector((state) => state.user.user);
   const handleLikes = () => {
     if (likes.length > 0) {
-      const userLiked = likes.find((like) => like === creator);
+      const userLiked = likes.find((like) => like === user?._id);
       return userLiked ? (
         <>
-          <RiThumbUpFill />
+          <RiThumbUpFill
+            color="#158E83 
+
+"
+          />
 
           <Box>
             {" "}
@@ -114,6 +118,7 @@ const PostCard = ({
                 as="button"
                 ml="2"
                 onClick={() => dispatch(likePostStartAsync(id))}
+                disabled={!user}
               >
                 {handleLikes()}
               </Box>

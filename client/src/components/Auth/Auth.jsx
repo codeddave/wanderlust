@@ -28,11 +28,10 @@ const Auth = () => {
     e.preventDefault();
 
     if (isSignUp) {
-      dispatch(signUpStartAsync(formData));
+      dispatch(signUpStartAsync(formData, history));
     } else {
-      dispatch(signInStartAsync(formData));
+      dispatch(signInStartAsync(formData, history));
     }
-    history.push("/");
   };
   const handleSwitchMode = () => {
     setIsSignUp(!isSignUp);
@@ -40,19 +39,21 @@ const Auth = () => {
     setShowPassword(false);
   };
   return (
-    <div>
-      <Box
-        d="flex"
-        flexDirection="column"
-        justifyContent="center"
-        alignItems="center"
-      >
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        justifyItems: "center",
+      }}
+    >
+      <Box>
         <Box
           as="form"
           maxW="sm"
           width="xs"
           borderRadius="lg"
-          overflow="hidden"
           p="4"
           onSubmit={handleSubmit}
         >

@@ -101,7 +101,7 @@ const NewPost = ({ setCurrentId, currentId }) => {
             value={postData.tags}
           />
         </FormControl>
-        <Box ml="2">
+        <Box mt="2">
           <FileBase
             type="file"
             multiple={false}
@@ -113,7 +113,6 @@ const NewPost = ({ setCurrentId, currentId }) => {
         <Button colorScheme="teal" mt="4" type="submit">
           Submit
         </Button>
-        <Button onClick={() => dispatch(signOut())}>Logout</Button>
       </Box>
     </div>
   );
