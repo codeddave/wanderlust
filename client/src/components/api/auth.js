@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const url = "http://localhost:5006";
+const url = "https://wander-lust-mern.herokuapp.com/";
 
 axios.defaults.headers.common["Authorization"] =
   "Bearer " +
