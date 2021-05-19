@@ -15,7 +15,6 @@ import {
   createPostStartAsync,
   updatePostStartAsync,
 } from "../redux/posts/postActions";
-import { signOut } from "../redux/auth/userActions";
 //create post
 const NewPost = ({ setCurrentId, currentId }) => {
   const posts = useSelector((state) => state.post.posts);

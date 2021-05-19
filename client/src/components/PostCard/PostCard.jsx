@@ -1,7 +1,6 @@
 import React from "react";
 import { Box, Image } from "@chakra-ui/react";
 import moment from "moment";
-import { MdThumbUp } from "react-icons/md";
 import { MdEdit } from "react-icons/md";
 import { RiDeleteBin5Fill } from "react-icons/ri";
 import { RiThumbUpLine } from "react-icons/ri";

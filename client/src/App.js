@@ -1,11 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  BrowserRouter as Router,
-  Redirect,
-  Route,
-  Switch,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Auth from "./components/Auth/Auth";
 import Home from "./components/Home/Home";
 import decode from "jwt-decode";
@@ -23,7 +18,7 @@ const App = () => {
         dispatch(signOut());
       }
     }
-  }, []);
+  }, [dispatch]);
   return (
     <div>
       <Router>
