@@ -9,8 +9,9 @@ import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 const App = () => {
   const user = useSelector((state) => state.user.userData);
   const dispatch = useDispatch();
+  const token = user?.token;
+
   useEffect(() => {
-    const token = user?.token;
     if (token) {
       const decodedToken = decode(token);
 
@@ -18,7 +19,7 @@ const App = () => {
         dispatch(signOut());
       }
     }
-  }, [dispatch]);
+  }, [dispatch, token]);
   return (
     <div>
       <Router>
