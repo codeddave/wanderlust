@@ -2,19 +2,25 @@ import { Button } from "@chakra-ui/button";
 import { Box } from "@chakra-ui/layout";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router";
 import NewPost from "../NewPost/NewPost";
 import Posts from "../Posts/Posts";
 import { signOut } from "../redux/auth/userActions";
 
 function Home() {
   const [currentId, setCurrentId] = useState(null);
+  const history = useHistory();
   const user = useSelector((state) => state.user.userData);
   const dispatch = useDispatch();
   return (
     <div className="Home">
       <Box d="flex" justifyContent="flex-end" pt="10" pr="10">
         {" "}
-        <Button onClick={() => dispatch(signOut())}>Logout</Button>
+        {user ? (
+          <Button onClick={() => dispatch(signOut())}>Logout</Button>
+        ) : (
+          <Button onClick={() => history.push("/auth")}>Sign In</Button>
+        )}
       </Box>
       <Box d="flex" flexDirection="column" alignItems="center">
         {user ? (
