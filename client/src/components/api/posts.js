@@ -1,10 +1,10 @@
 import axios from "axios";
 
 const url = "https://wander-lust-mern.herokuapp.com/posts";
-axios.defaults.headers.common["Authorization"] =
+/* axios.defaults.headers.common["Authorization"] =
   "Bearer " +
   JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user).userData
-    ?.token;
+    ?.token; */
 export const fetchPosts = async () => {
   try {
     const res = await axios.get(url);
