@@ -17,15 +17,7 @@ const Posts = ({ setCurrentId }) => {
       {posts.length < 1 ? (
         <Loader type="TailSpin" color="#000000" height={100} width={100} />
       ) : (
-        <Grid
-          templateColumns={[
-            "repeat(1, 1fr)",
-            "repeat(2, 1fr)",
-            "repeat(2, 1fr)",
-            "repeat(4, 1fr)",
-          ]}
-          gap={4}
-        >
+        <Grid>
           {posts.map((post) => (
             <PostCard
               title={post.title}

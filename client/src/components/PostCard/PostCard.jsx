@@ -59,9 +59,10 @@ const PostCard = ({
   };
   return (
     <Box
-      maxW="lg"
+      maxW="xs"
       borderWidth="1px"
       borderRadius="lg"
+      overflow="hidden"
       w="xl"
       position="relative"
       height="full"
@@ -69,11 +70,11 @@ const PostCard = ({
       flexDirection="column"
       justifyContent="space-between"
     >
-      <Box position="absolute" pl="6">
+      {/* <Box position="absolute" pl="6">
         <Box as="p" mt="1" fontWeight="semibold" top="1">
           {name}
         </Box>
-      </Box>
+      </Box> */}
       <Box>
         {user?._id === creator ? (
           <Box d="flex" justifyContent="flex-end" mt="2" mr="2">
