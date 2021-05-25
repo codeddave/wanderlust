@@ -30,11 +30,7 @@ const PostCard = ({
       const userLiked = likes.find((like) => like === user?._id);
       return userLiked ? (
         <>
-          <RiThumbUpFill
-            color="#158E83 
-
-"
-          />
+          <RiThumbUpFill color="#158E83" />
 
           <Box>
             {" "}
@@ -63,10 +59,9 @@ const PostCard = ({
   };
   return (
     <Box
-      maxW="xs"
+      maxW="lg"
       borderWidth="1px"
       borderRadius="lg"
-      overflow="hidden"
       w="xl"
       position="relative"
       height="full"
