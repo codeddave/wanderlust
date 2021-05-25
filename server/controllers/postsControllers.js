@@ -38,6 +38,7 @@ const updatePost = async (req, res) => {
       { ...post, _id },
       { new: true }
     );
+    console.log("hey");
     res.json(updatedPost);
   } catch (error) {
     console.log(error.message);
