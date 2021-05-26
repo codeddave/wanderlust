@@ -15,10 +15,11 @@ app.use(cors());
 
 app.use("/posts", postRoutes);
 app.use("/user", userRoutes);
+const PORT = process.env.PORT || 5006;
+
 app.use("/", (req, res) => {
   res.send("Welcome to the Wanderlust Api");
 });
-const PORT = process.env.PORT || 5006;
 app.use((error, req, res, next) => {
   if (res.headerSent) {
     return next(error);
