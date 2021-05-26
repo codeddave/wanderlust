@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Image } from "@chakra-ui/react";
+import { Box, Image, Text } from "@chakra-ui/react";
 import moment from "moment";
 import { MdEdit } from "react-icons/md";
 import { RiDeleteBin5Fill } from "react-icons/ri";
@@ -29,32 +29,32 @@ const PostCard = ({
     if (likes.length > 0) {
       const userLiked = likes.find((like) => like === user?._id);
       return userLiked ? (
-        <>
+        <Box d="flex" alignItems="center">
           <RiThumbUpFill color="#158E83" />
 
-          <Box>
+          <Text fontSize="sm" pl="1">
             {" "}
             {likes.length > 2
               ? `You and ${likes.length - 1} others`
               : `${likes.length} like${likes.length > 1 ? "s" : ""}`}
-          </Box>
-        </>
+          </Text>
+        </Box>
       ) : (
-        <>
+        <Box d="flex" alignItems="center">
           <RiThumbUpLine />
-          <Box>
+          <Box pl="1">
             {likes.length} {likes.length === 1 ? "Like" : "Likes"}
           </Box>
-        </>
+        </Box>
       );
     }
 
     return (
-      <>
+      <Box d="flex" alignItems="center">
         {" "}
         <RiThumbUpLine />
-        <Box>Like</Box>{" "}
-      </>
+        <Box pl="1">Like</Box>{" "}
+      </Box>
     );
   };
   return (
@@ -107,19 +107,24 @@ const PostCard = ({
             pt="4"
             alignItems="center"
           >
-            <Box d="flex" alignItems="center" justifyContent="">
+            <Box d="flex" alignItems="center" justifyContent="center">
               <Box
                 as="button"
-                ml="2"
                 onClick={() => dispatch(likePostStartAsync(id))}
                 disabled={!user}
               >
                 {handleLikes()}
               </Box>
             </Box>
-            <p>{moment(createdAt).fromNow()}</p>
+
+            <Box>
+              <p>{moment(createdAt).fromNow()}</p>
+            </Box>
           </Box>
         </Box>
+        <Text fontSize="sm" textAlign="right" mt="2">
+          <i>- {name}</i>
+        </Text>
       </Box>
     </Box>
   );
