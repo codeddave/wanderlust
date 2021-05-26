@@ -41,7 +41,7 @@ const Auth = () => {
   return (
     <div>
       <Box
-        pt={["20", "60"]}
+        pt={["40", "60"]}
         d="flex"
         flexDirection="column"
         justifyContent="center"
