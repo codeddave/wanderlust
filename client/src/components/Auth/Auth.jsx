@@ -68,7 +68,7 @@ const Auth = () => {
             </FormControl>
           ) : null}
 
-          <FormControl>
+          <FormControl pt="2">
             <FormLabel> Email</FormLabel>
             <Input
               type="text"
@@ -78,7 +78,7 @@ const Auth = () => {
               onChange={handleChange}
             />
           </FormControl>
-          <FormControl>
+          <FormControl pt="2">
             <FormLabel> Password</FormLabel>
             <InputGroup>
               <Input
@@ -96,7 +96,9 @@ const Auth = () => {
             </InputGroup>
           </FormControl>
 
-          <Button type="submit">{isSignUp ? "Sign Up" : "Sign In"}</Button>
+          <Button mt="3" type="submit">
+            {isSignUp ? "Sign Up" : "Sign In"}
+          </Button>
 
           <Box as="p">
             {" "}
