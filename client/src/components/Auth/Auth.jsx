@@ -39,16 +39,14 @@ const Auth = () => {
     setShowPassword(false);
   };
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        justifyItems: "center",
-      }}
-    >
-      <Box>
+    <div>
+      <Box
+        pt={["20", "60"]}
+        d="flex"
+        flexDirection="column"
+        justifyContent="center"
+        alignItems="center"
+      >
         <Box
           as="form"
           maxW="sm"
