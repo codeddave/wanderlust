@@ -1,9 +1,10 @@
 import axios from "axios";
 
 const url = "https://wander-lust-mern.herokuapp.com";
-const token =
-  JSON.parse(JSON.parse(localStorage.getItem("persist:root"))?.user).userData
-    ?.token || "";
+const token = localStorage.getItem("persist:root")
+  ? JSON.parse(JSON.parse(localStorage.getItem("persist:root"))?.user).userData
+  : "";
+
 console.log(token);
 axios.defaults.headers.common["Authorization"] = "Bearer " + token;
 
