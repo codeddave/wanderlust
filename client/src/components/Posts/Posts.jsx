@@ -15,7 +15,7 @@ const Posts = ({ setCurrentId }) => {
   }, [dispatch]);
   return (
     <>
-      {posts.length < 1 ? (
+      {!posts || !posts.length ? (
         <Loader type="TailSpin" color="#000000" height={100} width={100} />
       ) : (
         <div className="posts">

@@ -21,7 +21,7 @@ const NewPost = ({ setCurrentId, currentId }) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
 
-  console.log(currentId);
+  //console.log(currentId);
   const postToUpdate = currentId
     ? posts.find((post) => post._id === currentId)
     : null;
