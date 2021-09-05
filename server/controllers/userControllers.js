@@ -32,13 +32,12 @@ const signIn = async (req, res, next) => {
   const { email, password } = req.body;
   try {
     const existingUser = await User.findOne({ email });
-
     if (!existingUser)
       res.status(404).json({ message: "User does not exist!" });
     const isPasswordCorrect = await bcrypt.compare(
       password,
       existingUser.password
-    );
+    ); 
 
     if (!isPasswordCorrect)
       return res.status(400).json({ message: "Invalid user credentials" });

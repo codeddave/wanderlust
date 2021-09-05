@@ -5,14 +5,20 @@ import { ChakraProvider } from "@chakra-ui/react";
 import { Provider } from "react-redux";
 import { store, persistor } from "./components/redux/store";
 import { PersistGate } from "redux-persist/integration/react";
+import { IconContext } from "react-icons";
+
 ReactDOM.render(
   <React.StrictMode>
     <ChakraProvider>
-      <Provider store={store}>
-        <PersistGate persistor={persistor}>
-          <App />
-        </PersistGate>
-      </Provider>
+      <IconContext.Provider
+        value={{ size: "1.4rem", className: "react-icons" }}
+      >
+        <Provider store={store}>
+          <PersistGate persistor={persistor}>
+            <App />
+          </PersistGate>
+        </Provider>
+      </IconContext.Provider>
     </ChakraProvider>
   </React.StrictMode>,
   document.getElementById("root")

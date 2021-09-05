@@ -7,6 +7,7 @@ import NewPost from "../NewPost/NewPost";
 import Posts from "../Posts/Posts";
 import { signOut } from "../redux/auth/userActions";
 import { BiUserCircle } from "react-icons/bi";
+import { Link } from "react-router-dom";
 
 function Home() {
   const [currentId, setCurrentId] = useState(null);
@@ -26,9 +27,11 @@ function Home() {
         {user ? (
           <>
             <Button onClick={() => dispatch(signOut())}>Logout</Button>
-            <div>
-              <BiUserCircle />
-            </div>
+            <Link to="/profile">
+              <Box marginLeft="4">
+                <BiUserCircle width="3em" height="300" />
+              </Box>
+            </Link>
           </>
         ) : (
           <Button onClick={() => history.push("/auth")}>Sign In</Button>

@@ -7,6 +7,7 @@ import decode from "jwt-decode";
 import { signOut } from "./components/redux/auth/userActions";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Profile from "./components/Profile/Profile";
+import "./App.css";
 const App = () => {
   const user = useSelector((state) => state.user.userData);
   const dispatch = useDispatch();
