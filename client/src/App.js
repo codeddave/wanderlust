@@ -6,6 +6,7 @@ import Home from "./components/Home/Home";
 import decode from "jwt-decode";
 import { signOut } from "./components/redux/auth/userActions";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+import Profile from "./components/Profile/Profile";
 const App = () => {
   const user = useSelector((state) => state.user.userData);
   const dispatch = useDispatch();
@@ -25,6 +26,7 @@ const App = () => {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/auth" component={Auth} />
+          <Route exact path="/profile" component={Profile} />
         </Switch>
       </Router>
     </div>
