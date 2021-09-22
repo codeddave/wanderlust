@@ -33,11 +33,11 @@ const signIn = async (req, res, next) => {
   try {
     const existingUser = await User.findOne({ email });
     if (!existingUser)
-      res.status(404).json({ message: "User does not exist!" });
+      return res.status(404).json({ message: "User does not exist!" });
     const isPasswordCorrect = await bcrypt.compare(
       password,
       existingUser.password
-    ); 
+    );
 
     if (!isPasswordCorrect)
       return res.status(400).json({ message: "Invalid user credentials" });
@@ -57,5 +57,28 @@ const signIn = async (req, res, next) => {
   }
 };
 
+export const getUserData = async () => {
+  //const {id: _id} =req.params
+  if (!req.userId) return next(new HttpError("User unauthenticated", 400));
+  let user;
+  try {
+    user = await User.findById(String(req.userId));
+  } catch (error) {
+    return res
+      .status(404)
+      .json({ message: "Something went wrong, could not get user" });
+  }
+  try {
+    const posts = await posts.find({ creator: String(req.userId) });
+
+    res.status(200).json({ user: existingUser, token });
+  } catch (error) {
+    return res
+      .status(404)
+      .json({ message: "Something went wrong, could not get posts" });
+  }
+};
+
 exports.signUp = signUp;
 exports.signIn = signIn;
+exports.getUserData;
