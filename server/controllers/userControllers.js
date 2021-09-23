@@ -71,7 +71,7 @@ export const getUserData = async () => {
   try {
     const posts = await posts.find({ creator: String(req.userId) });
 
-    res.status(200).json({ user: existingUser, token });
+    res.status(200).json({ user, posts });
   } catch (error) {
     return res
       .status(404)
@@ -81,4 +81,4 @@ export const getUserData = async () => {
 
 exports.signUp = signUp;
 exports.signIn = signIn;
-exports.getUserData;
+exports.getUserData = getUserData;
