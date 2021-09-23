@@ -25,3 +25,12 @@ export const signIn = async (userData) => {
     console.log(error.message);
   }
 };
+
+export const getUserProfileDataApi = async () => {
+  try {
+    const res = await axios.get(`${url}/get-user-data`);
+    return res.data;
+  } catch (error) {
+    console.log(error.message);
+  }
+};

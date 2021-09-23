@@ -1,4 +1,4 @@
-import { signIn, signUp } from "../../api/auth";
+import { getUserProfileDataApi, signIn, signUp } from "../../api/auth";
 
 const { userActionTypes } = require("./userActionTypes");
 
@@ -68,6 +68,18 @@ export const signInStartAsync = (user, history) => {
       history.push("/");
     } catch (error) {
       dispatch(signInFailure());
+    }
+  };
+};
+
+export const getUserProfileDataStartAsync = () => {
+  return async (dispatch) => {
+    dispatch(getUserProfileDataStart());
+    try {
+      const userProfile = await getUserProfileDataApi();
+      dispatch(getUserProfileDataSuccess(userProfile));
+    } catch (error) {
+      dispatch(getUserProfileDataFailure());
     }
   };
 };
