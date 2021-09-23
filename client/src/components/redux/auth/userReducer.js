@@ -4,6 +4,8 @@ const INITIAL_STATE = {
   userData: null,
   error: null,
   user: null,
+  userProfile: null,
+  isLoading: false,
 };
 export const userReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
@@ -19,7 +21,7 @@ export const userReducer = (state = INITIAL_STATE, action) => {
     case userActionTypes.SIGN_UP_FAILURE:
       return {
         ...state,
-        error: null,
+        error: action.payload,
       };
     case userActionTypes.SIGNOUT:
       return {
@@ -27,6 +29,24 @@ export const userReducer = (state = INITIAL_STATE, action) => {
         userData: null,
         user: null,
       };
+    case userActionTypes.GET_USER_PROFILE_DATA_START:
+      return {
+        ...state,
+        isloading: true,
+      };
+    case userActionTypes.GET_USER_PROFILE_DATA_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        userProfile: action.payload,
+      };
+
+    case userActionTypes.GET_USER_PROFILE_DATA_FAILURE:
+      return {
+        ...state,
+        error: action.payload,
+      };
+
     default:
       return state;
   }

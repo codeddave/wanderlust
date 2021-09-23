@@ -29,8 +29,21 @@ export const signInFailure = (error) => ({
   type: userActionTypes.SIGN_IN_SUCCESS,
   payload: error,
 });
-export const signOut = (error) => ({
+export const signOut = () => ({
   type: userActionTypes.SIGNOUT,
+});
+
+export const getUserProfileDataStart = () => ({
+  type: userActionTypes.GET_USER_PROFILE_DATA_START,
+});
+
+export const getUserProfileDataSuccess = (userProfileData) => ({
+  type: userActionTypes.GET_USER_PROFILE_DATA_SUCCESS,
+  payload: userProfileData,
+});
+export const getUserProfileDataFailure = (error) => ({
+  type: userActionTypes.GET_USER_PROFILE_DATA_FAILURE,
+  payload: error,
 });
 
 export const signUpStartAsync = (user, history) => {
