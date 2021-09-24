@@ -2,7 +2,7 @@
   "name": "wanderlust",
   "version": "0.1.0",
   "private": true,
-  "proxy":"https://wander-lust-mern.herokuapp.com",
+  "proxy": "https://wander-lust-mern.herokuapp.com",
   "dependencies": {
     "@chakra-ui/react": "^1.5.0",
     "@emotion/react": "^11.1.5",
