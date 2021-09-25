@@ -100,7 +100,7 @@ const Auth = () => {
             {isSignUp ? "Sign Up" : "Sign In"}
           </Button>
 
-          <Box as="p">
+          <Box as="p" mt="3" fontSize="sm">
             {" "}
             {isSignUp
               ? "Are you already a member?"
