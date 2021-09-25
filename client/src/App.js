@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { BrowserRouter as Route, Switch, useLocation } from "react-router-dom";
+import { Route, Switch, useLocation } from "react-router-dom";
 import Auth from "./components/Auth/Auth";
 import Home from "./components/Home/Home";
 import decode from "jwt-decode";
@@ -22,14 +22,6 @@ const App = () => {
     }
   }, [location, dispatch, token]);
 
-  /* useEffect(() => {
-    if (token) {
-      const decodedToken = decode(token);
-      if (decodedToken.exp * 1000 < new Date().getTime()) {
-        dispatch(signOut());
-      }
-    }
-  }, [dispatch, token]); */
   return (
     <div>
       <Switch>
