@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Route, Switch, useLocation } from "react-router-dom";
 import Auth from "./components/Auth/Auth";
 import Home from "./components/Home/Home";
 import decode from "jwt-decode";
@@ -11,8 +11,8 @@ import "./App.css";
 const App = () => {
   const user = useSelector((state) => state.user.userData);
   const dispatch = useDispatch();
+  const location = useLocation();
   const token = user?.token;
-
   useEffect(() => {
     if (token) {
       const decodedToken = decode(token);
@@ -20,16 +20,23 @@ const App = () => {
         dispatch(signOut());
       }
     }
-  }, [dispatch, token]);
+  }, [location, dispatch, token]);
+
+  /* useEffect(() => {
+    if (token) {
+      const decodedToken = decode(token);
+      if (decodedToken.exp * 1000 < new Date().getTime()) {
+        dispatch(signOut());
+      }
+    }
+  }, [dispatch, token]); */
   return (
     <div>
-      <Router>
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/auth" component={Auth} />
-          <Route exact path="/profile" component={Profile} />
-        </Switch>
-      </Router>
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/auth" component={Auth} />
+        <Route exact path="/profile" component={Profile} />
+      </Switch>
     </div>
   );
 };
