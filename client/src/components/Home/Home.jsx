@@ -2,7 +2,7 @@ import { Button } from "@chakra-ui/button";
 import { Box } from "@chakra-ui/layout";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router";
+import { useHistory } from "react-router-dom";
 import NewPost from "../NewPost/NewPost";
 import Posts from "../Posts/Posts";
 import { signOut } from "../redux/auth/userActions";
@@ -34,7 +34,9 @@ function Home() {
             </Link>
           </>
         ) : (
-          <Button onClick={() => history.push("/auth")}>Sign In</Button>
+          <>
+            <Button onClick={() => history.push("/auth")}>Sign In</Button>
+          </>
         )}
       </Box>
       <Box d="flex" flexDirection="column" alignItems="center">
