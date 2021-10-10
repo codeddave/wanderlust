@@ -10,6 +10,7 @@ import {
   likePostStartAsync,
 } from "../redux/posts/postActions";
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from "@chakra-ui/toast";
 
 const PostCard = ({
   title,
@@ -25,6 +26,14 @@ const PostCard = ({
 }) => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
+
+  const handleLikeAction = () => {
+    if (user) {
+      dispatch(likePostStartAsync(id));
+    } else {
+      toast.notify("You need to be logged in to like a post");
+    }
+  };
   const handleLikes = () => {
     if (likes.length > 0) {
       const userLiked = likes.find((like) => like === user?._id);
@@ -75,7 +84,7 @@ const PostCard = ({
         </Box>
       </Box> */}
       <Box>
-        {user?._id === creator ? (
+        {user?._id === creator && setCurrentId ? (
           <Box d="flex" justifyContent="flex-end" mt="2" mr="2">
             <Box mr="4">
               <MdEdit onClick={() => setCurrentId(id)} mr="6" />
@@ -108,11 +117,7 @@ const PostCard = ({
             alignItems="center"
           >
             <Box d="flex" alignItems="center" justifyContent="center">
-              <Box
-                as="button"
-                onClick={() => dispatch(likePostStartAsync(id))}
-                disabled={!user}
-              >
+              <Box as="button" onClick={handleLikeAction}>
                 {handleLikes()}
               </Box>
             </Box>

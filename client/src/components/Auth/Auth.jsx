@@ -5,7 +5,7 @@ import { Box } from "@chakra-ui/layout";
 import React, { useState } from "react";
 import { MdVisibility, MdVisibilityOff } from "react-icons/md";
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router";
+import { useHistory } from "react-router-dom";
 import { signInStartAsync, signUpStartAsync } from "../redux/auth/userActions";
 const Auth = () => {
   const dispatch = useDispatch();
