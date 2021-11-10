@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const url = "http://localhost:5006/posts";
+const url = "https://wander-lust-mern.herokuapp.com/posts";
 
 const token = localStorage.getItem("persist:root")
   ? JSON.parse(JSON.parse(localStorage.getItem("persist:root"))?.user).userData
