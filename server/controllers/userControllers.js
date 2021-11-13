@@ -1,4 +1,6 @@
 const User = require("../models/user");
+const Post = require("../models/post");
+
 const bcrypt = require("bcryptjs");
 const HttpError = require("../models/http-error");
 const jwt = require("jsonwebtoken");
@@ -57,9 +59,10 @@ const signIn = async (req, res, next) => {
   }
 };
 
-export const getUserData = async () => {
+const getUserData = async (req, res, next) => {
   //const {id: _id} =req.params
   if (!req.userId) return next(new HttpError("User unauthenticated", 400));
+  console.log(req.userId);
   let user;
   try {
     user = await User.findById(String(req.userId));
@@ -68,8 +71,9 @@ export const getUserData = async () => {
       .status(404)
       .json({ message: "Something went wrong, could not get user" });
   }
+
   try {
-    const posts = await posts.find({ creator: String(req.userId) });
+    const posts = await Post.find({ creator: String(req.userId) });
 
     res.status(200).json({ user, posts });
   } catch (error) {
