@@ -35,22 +35,23 @@ const Profile = () => {
       >
         <p>{userProfile?.user?.name}</p>
         <p>{userProfile?.user?.email}</p>
-
-        <Box>
-          {userProfile?.posts.map((post) => (
-            <PostCard
-              tags={post.tags}
-              name={post.id}
-              id={post.id}
-              title={post.title}
-              description={post.description}
-              createdAt={post.createdAt}
-              likes={post.likes}
-              image={post.selectedFile}
-              creator={post.creator}
-            />
-          ))}
-        </Box>
+        {userProfile.posts.length ? (
+          <Box>
+            {userProfile?.posts.map((post) => (
+              <PostCard
+                tags={post.tags}
+                name={post.id}
+                id={post.id}
+                title={post.title}
+                description={post.description}
+                createdAt={post.createdAt}
+                likes={post.likes}
+                image={post.selectedFile}
+                creator={post.creator}
+              />
+            ))}
+          </Box>
+        ) : null}
       </Box>
     </div>
   );
