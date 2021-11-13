@@ -33,8 +33,8 @@ const Profile = () => {
         alignItems="center"
         pt="40"
       >
-        <p>{userProfile?.user.name}</p>
-        <p>{userProfile?.user.email}</p>
+        <p>{userProfile?.user?.name}</p>
+        <p>{userProfile?.user?.email}</p>
 
         <Box>
           {userProfile?.posts.map((post) => (
