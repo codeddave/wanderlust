@@ -1,11 +1,11 @@
 import { Box } from "@chakra-ui/layout";
 import { toast } from "@chakra-ui/toast";
 import React, { useEffect } from "react";
+import Loader from "react-loader-spinner";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import PostCard from "../PostCard/PostCard";
 import { getUserProfileDataStartAsync } from "../redux/auth/userActions";
-
 const Profile = () => {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -22,10 +22,8 @@ const Profile = () => {
     }
   }, [user, history]);
 
-  console.log(user);
-  console.log(userProfile);
-
-  //console.log(userProfile);
+  if (!user || !userProfile.posts.length)
+    return <Loader type="TailSpin" color="#000000" height={100} width={100} />;
   return (
     <div>
       <Box
