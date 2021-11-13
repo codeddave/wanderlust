@@ -37,7 +37,7 @@ const Profile = () => {
       >
         <p>{userProfile?.user?.name}</p>
         <p>{userProfile?.user?.email}</p>
-        {userProfile.posts.length ? (
+        {userProfile && userProfile.posts && userProfile.posts.length ? (
           <Box>
             {userProfile?.posts.map((post) => (
               <PostCard
