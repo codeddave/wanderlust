@@ -23,6 +23,8 @@ const Profile = () => {
   }, [user, history]);
 
   console.log(user);
+  console.log(userProfile);
+
   //console.log(userProfile);
   return (
     <div>
