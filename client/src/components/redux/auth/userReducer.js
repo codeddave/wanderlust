@@ -29,6 +29,7 @@ export const userReducer = (state = INITIAL_STATE, action) => {
         userData: null,
         user: null,
       };
+
     case userActionTypes.GET_USER_PROFILE_DATA_START:
       return {
         ...state,
