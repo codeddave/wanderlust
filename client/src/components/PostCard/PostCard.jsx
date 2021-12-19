@@ -10,7 +10,7 @@ import {
   likePostStartAsync,
 } from "../redux/posts/postActions";
 import { useDispatch, useSelector } from "react-redux";
-import { toast } from "@chakra-ui/toast";
+import { useToast } from "@chakra-ui/toast";
 
 const PostCard = ({
   title,
@@ -24,6 +24,7 @@ const PostCard = ({
   tags,
   name,
 }) => {
+  const toast = useToast();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
 
@@ -31,7 +32,13 @@ const PostCard = ({
     if (user) {
       dispatch(likePostStartAsync(id));
     } else {
-      toast.notify("You need to be logged in to like a post");
+      toast({
+        title: "You need to be logged in to like a post",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+        position: "top",
+      });
     }
   };
   const handleLikes = () => {
