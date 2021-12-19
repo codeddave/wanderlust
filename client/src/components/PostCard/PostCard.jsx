@@ -46,8 +46,9 @@ const PostCard = ({
       const userLiked = likes.find((like) => like === user?._id);
       return userLiked ? (
         <Box d="flex" alignItems="center">
-          <RiThumbUpFill color="#158E83" />
-
+          <Box cursor="pointer">
+            <RiThumbUpFill color="#158E83" />
+          </Box>
           <Text fontSize="sm" pl="1">
             {" "}
             {likes.length > 2
@@ -57,9 +58,11 @@ const PostCard = ({
         </Box>
       ) : (
         <Box d="flex" alignItems="center">
-          <RiThumbUpLine />
+          <Box cursor="pointer">
+            <RiThumbUpLine />
+          </Box>
           <Box pl="1">
-            {likes.length} {likes.length === 1 ? "Like" : "Likes"}
+            {likes.length} {likes.length === 1 ? "like" : "likes"}
           </Box>
         </Box>
       );
@@ -68,8 +71,10 @@ const PostCard = ({
     return (
       <Box d="flex" alignItems="center">
         {" "}
-        <RiThumbUpLine />
-        <Box pl="1">Like</Box>{" "}
+        <Box cursor="pointer">
+          <RiThumbUpLine />
+        </Box>
+        <Box pl="1">like</Box>{" "}
       </Box>
     );
   };
@@ -93,12 +98,14 @@ const PostCard = ({
       <Box>
         {user?._id === creator && setCurrentId ? (
           <Box d="flex" justifyContent="flex-end" mt="2" mr="2">
-            <Box mr="4">
+            <Box mr="4" cursor="pointer">
               <MdEdit onClick={() => setCurrentId(id)} mr="6" />
             </Box>
-            <RiDeleteBin5Fill
-              onClick={() => dispatch(deletePostStartAsync(id))}
-            />
+            <Box cursor="pointer">
+              <RiDeleteBin5Fill
+                onClick={() => dispatch(deletePostStartAsync(id))}
+              />
+            </Box>
           </Box>
         ) : null}
 
