@@ -22,7 +22,7 @@ const Profile = () => {
     }
   }, [user, history]);
 
-  if (!user || !userProfile.posts.length)
+  if (!user || !userProfile)
     return <Loader type="TailSpin" color="#000000" height={100} width={100} />;
   return (
     <div>
@@ -51,7 +51,9 @@ const Profile = () => {
               />
             ))}
           </Box>
-        ) : null}
+        ) : (
+          <p>You are yet to create post</p>
+        )}
       </Box>
     </div>
   );
