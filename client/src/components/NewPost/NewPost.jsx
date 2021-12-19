@@ -59,6 +59,7 @@ const NewPost = ({ setCurrentId, currentId }) => {
         width="xs"
         borderRadius="lg"
         overflow="hidden"
+        padding={10}
         mt="20"
         mb="20"
         as="form"

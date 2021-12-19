@@ -39,9 +39,10 @@ const Profile = () => {
           <Box>
             {userProfile?.posts.map((post) => (
               <PostCard
+                key={post._id}
                 tags={post.tags}
-                name={post.id}
-                id={post.id}
+                name={post.name}
+                id={post._id}
                 title={post.title}
                 description={post.description}
                 createdAt={post.createdAt}
