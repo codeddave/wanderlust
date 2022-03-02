@@ -89,7 +89,6 @@ const PostCard = ({
       d="flex"
       flexDirection="column"
       justifyContent="space-between"
-      marginRight="30px"
       paddingBottom={2}
     >
       {/* <Box position="absolute" pl="6">

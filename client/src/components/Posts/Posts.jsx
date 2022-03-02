@@ -14,7 +14,7 @@ const Posts = ({ setCurrentId }) => {
     dispatch(getPostsStartAsync());
   }, [dispatch]);
   return (
-    <>
+    <div className="posts-container">
       {!posts || !posts.length ? (
         <Loader type="TailSpin" color="#000000" height={100} width={100} />
       ) : (
@@ -36,7 +36,7 @@ const Posts = ({ setCurrentId }) => {
           ))}
         </div>
       )}
-    </>
+    </div>
   );
 };
 
