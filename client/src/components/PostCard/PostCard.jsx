@@ -89,6 +89,8 @@ const PostCard = ({
       d="flex"
       flexDirection="column"
       justifyContent="space-between"
+      marginRight="30px"
+      paddingBottom={2}
     >
       {/* <Box position="absolute" pl="6">
         <Box as="p" mt="1" fontWeight="semibold" top="1">
@@ -112,7 +114,7 @@ const PostCard = ({
         <Image src={image} h="44" w="full" objectFit="cover" p="4" />
       </Box>
 
-      <Box p="6" mt="2">
+      <Box paddingX={6} mt="2">
         <Box as="p" mt="1" fontWeight="semibold">
           {title}
         </Box>
