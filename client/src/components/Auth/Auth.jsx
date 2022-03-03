@@ -47,8 +47,8 @@ const Auth = () => {
     <div>
       <Box
         position="absolute"
-        top={20}
-        left={20}
+        top={["10", "20"]}
+        left={["5", "20"]}
         cursor="pointer"
         onClick={handleBackClick}
       >
@@ -64,7 +64,7 @@ const Auth = () => {
         <Box
           as="form"
           maxW="sm"
-          width="xs"
+          width={["90%", "xs"]}
           borderRadius="lg"
           p="4"
           onSubmit={handleSubmit}
