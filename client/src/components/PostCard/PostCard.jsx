@@ -41,6 +41,11 @@ const PostCard = ({
       });
     }
   };
+
+  const handleEdit = (id) => {
+    setCurrentId(id);
+    window.scrollTo(0, 0);
+  };
   const handleLikes = () => {
     if (likes.length > 0) {
       const userLiked = likes.find((like) => like === user?._id);
@@ -100,7 +105,7 @@ const PostCard = ({
         {user?._id === creator && setCurrentId ? (
           <Box d="flex" justifyContent="flex-end" mt="2" mr="2">
             <Box mr="4" cursor="pointer">
-              <MdEdit onClick={() => setCurrentId(id)} mr="6" />
+              <MdEdit onClick={() => handleEdit(id)} mr="6" />
             </Box>
             <Box cursor="pointer">
               <RiDeleteBin5Fill
