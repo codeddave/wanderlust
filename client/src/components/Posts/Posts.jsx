@@ -5,6 +5,7 @@ import { getPostsStartAsync } from "../redux/posts/postActions";
 //import { Grid } from "@chakra-ui/react";
 import Loader from "react-loader-spinner";
 import "./Posts.css";
+import { Box } from "@chakra-ui/react";
 
 const Posts = ({ setCurrentId }) => {
   const posts = useSelector((state) => state.post.posts);
@@ -16,7 +17,9 @@ const Posts = ({ setCurrentId }) => {
   return (
     <div className="posts-container">
       {!posts || !posts.length ? (
-        <Loader type="TailSpin" color="#000000" height={100} width={100} />
+        <Box marginBottom={20}>
+          <Loader type="TailSpin" color="#000000" height={50} width={50} />
+        </Box>
       ) : (
         <div className="posts">
           {posts.map((post) => (
