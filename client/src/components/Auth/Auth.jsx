@@ -7,6 +7,8 @@ import { MdVisibility, MdVisibilityOff } from "react-icons/md";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { signInStartAsync, signUpStartAsync } from "../redux/auth/userActions";
+
+import { BiArrowBack } from "react-icons/bi";
 const Auth = () => {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -38,8 +40,20 @@ const Auth = () => {
     setFormData({ name: "", email: "", password: "" });
     setShowPassword(false);
   };
+  const handleBackClick = () => {
+    history.push("/");
+  };
   return (
     <div>
+      <Box
+        position="absolute"
+        top={20}
+        left={20}
+        cursor="pointer"
+        onClick={handleBackClick}
+      >
+        <BiArrowBack />
+      </Box>
       <Box
         pt={["40", "60"]}
         d="flex"
