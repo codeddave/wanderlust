@@ -71,7 +71,7 @@ const NewPost = ({ setCurrentId, currentId }) => {
         overflow="hidden"
         padding={10}
         mt={["2", "8", "16"]}
-        mb={["6", "16"]}
+        mb={["2", "8", "16"]}
         as="form"
         onSubmit={handleSubmit}
         position="relative"
