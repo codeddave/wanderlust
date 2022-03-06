@@ -7,12 +7,13 @@ import { MdVisibility, MdVisibilityOff } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { signInStartAsync, signUpStartAsync } from "../redux/auth/userActions";
-
+import { useToast } from "@chakra-ui/toast";
 import { BiArrowBack } from "react-icons/bi";
 import Loader from "react-loader-spinner";
 import { selectIsLoading } from "../redux/auth/userSelectors";
 const Auth = () => {
   const dispatch = useDispatch();
+  const toast = useToast();
   const isLoading = useSelector(selectIsLoading);
   const history = useHistory();
   const [isSignUp, setIsSignUp] = useState(true);
@@ -35,7 +36,7 @@ const Auth = () => {
     if (isSignUp) {
       dispatch(signUpStartAsync(formData, history));
     } else {
-      dispatch(signInStartAsync(formData, history));
+      dispatch(signInStartAsync(formData, history, toast));
     }
   };
   const handleSwitchMode = () => {

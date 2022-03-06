@@ -59,13 +59,21 @@ export const signUpStartAsync = (user, history) => {
   };
 };
 
-export const signInStartAsync = (user, history) => {
+export const signInStartAsync = (user, history, toast) => {
   return async (dispatch) => {
     dispatch(signInStart());
     try {
       const userData = await signIn(user);
       dispatch(signInSuccess(userData));
+
       history.push("/");
+      toast({
+        title: "Welcome!",
+        status: "success",
+        position: "top",
+        duration: 3000,
+        isClosable: true,
+      });
     } catch (error) {
       dispatch(signInFailure());
     }
