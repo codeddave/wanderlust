@@ -26,7 +26,7 @@ export const signInSuccess = (userData) => ({
 });
 
 export const signInFailure = (error) => ({
-  type: userActionTypes.SIGN_IN_SUCCESS,
+  type: userActionTypes.SIGN_IN_FAILURE,
   payload: error,
 });
 export const signOut = () => ({
