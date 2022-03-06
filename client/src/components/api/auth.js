@@ -17,12 +17,19 @@ export const signUp = async (userData) => {
   }
 };
 
-export const signIn = async (userData) => {
+export const signIn = async (userData, toast) => {
   try {
     const res = await axios.post(`${url}/user/signin`, userData);
     return res.data;
   } catch (error) {
-    console.log(error.message);
+    toast({
+      title: error?.response?.data?.message,
+      status: "error",
+      position: "top",
+      duration: 3000,
+      isClosable: true,
+    });
+    console.log(error.response.data.message);
   }
 };
 

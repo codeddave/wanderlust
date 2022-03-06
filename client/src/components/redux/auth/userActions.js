@@ -63,7 +63,7 @@ export const signInStartAsync = (user, history, toast) => {
   return async (dispatch) => {
     dispatch(signInStart());
     try {
-      const userData = await signIn(user);
+      const userData = await signIn(user, toast);
       dispatch(signInSuccess(userData));
 
       history.push("/");
