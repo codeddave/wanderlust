@@ -80,7 +80,12 @@ const NewPost = ({ setCurrentId, currentId }) => {
           {currentId ? "Edit" : "Create"} a Memory{" "}
         </Box>
         {currentId ? (
-          <Box position="absolute" right="0" onClick={handleCloseEdit}>
+          <Box
+            position="absolute"
+            right="0"
+            cursor="pointer"
+            onClick={handleCloseEdit}
+          >
             <GrFormClose />
           </Box>
         ) : null}
