@@ -20,8 +20,8 @@ function Home() {
         d="flex"
         justifyContent="flex-end"
         alignItems="center"
-        pt="10"
-        pr="10"
+        pt={["4", "6"]}
+        pr={["4", "6", "8"]}
       >
         {" "}
         {user ? (
