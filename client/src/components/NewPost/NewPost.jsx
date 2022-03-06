@@ -70,7 +70,7 @@ const NewPost = ({ setCurrentId, currentId }) => {
         borderRadius="lg"
         overflow="hidden"
         padding={10}
-        mt="20"
+        mt={["8", "16"]}
         mb={["10", "16"]}
         as="form"
         onSubmit={handleSubmit}
