@@ -23,7 +23,7 @@ const Profile = () => {
   }, [user, history]);
 
   if (!user || !userProfile)
-    return <Loader type="TailSpin" color="#000000" height={100} width={100} />;
+    return <Loader type="TailSpin" color="#000000" height={50} width={50} />;
   return (
     <div>
       <Box
