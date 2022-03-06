@@ -11,6 +11,24 @@ import { useToast } from "@chakra-ui/toast";
 import { BiArrowBack } from "react-icons/bi";
 import Loader from "react-loader-spinner";
 import { selectIsLoading } from "../redux/auth/userSelectors";
+import { Formik } from "formik";
+import * as Yup from "yup";
+
+import {
+  CheckboxContainer,
+  CheckboxControl,
+  CheckboxSingleControl,
+  InputControl,
+  NumberInputControl,
+  PercentComplete,
+  RadioGroupControl,
+  ResetButton,
+  SelectControl,
+  SliderControl,
+  SubmitButton,
+  SwitchControl,
+  TextareaControl,
+} from "formik-chakra-ui";
 const Auth = () => {
   const dispatch = useDispatch();
   const toast = useToast();
@@ -47,7 +65,23 @@ const Auth = () => {
   const handleBackClick = () => {
     history.push("/");
   };
-  console.log(isLoading);
+  const validationSchema = Yup.object({
+    email: Yup.string()
+      .trim()
+      .min(2, "Too Short!")
+      .max(50, "Too Long!")
+      .email("Invalid email")
+      .required("Required"),
+    password: Yup.string()
+      .min(8, "Too Short!")
+      .max(50, "Too Long!")
+      .required("Required"),
+  });
+
+  const initialValues = {
+    email: "",
+    password: "",
+  };
   return (
     <div>
       <Box
@@ -69,84 +103,98 @@ const Auth = () => {
         <Box as="p" textAlign="center" fontWeight="bold" fontSize="xl">
           {isSignUp ? "Sign Up" : "Sign In"}
         </Box>
-        <Box
-          as="form"
-          maxW="sm"
-          width={["90%", "xs"]}
-          borderRadius="lg"
-          p="4"
+
+        <Formik
+          initialValues={initialValues}
           onSubmit={handleSubmit}
+          validationSchema={validationSchema}
         >
-          {isSignUp ? (
-            <FormControl>
-              <FormLabel> Name</FormLabel>
-              <Input
-                type="text"
-                placeholder="Name"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-              />
-            </FormControl>
-          ) : null}
-
-          <FormControl pt="2">
-            <FormLabel> Email</FormLabel>
-            <Input
-              type="text"
-              placeholder="Email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-            />
-          </FormControl>
-          <FormControl pt="2">
-            <FormLabel> Password</FormLabel>
-            <InputGroup>
-              <Input
-                type={showPassword ? "text" : "password"}
-                placeholder="Password"
-                name="password"
-                value={formData.password}
-                onChange={handleChange}
-              />
-
-              <InputRightAddon
-                children={showPassword ? <MdVisibilityOff /> : <MdVisibility />}
-                onClick={handlePasswordVisibility}
-              />
-            </InputGroup>
-          </FormControl>
-
-          <Button mt="3" type="submit">
-            {isSignUp ? "Sign Up" : "Sign In"}
-          </Button>
-
-          <Box as="p" mt="3" fontSize="sm">
-            {" "}
-            {isSignUp
-              ? "Are you already a member?"
-              : "Don't have an account yet?"}{" "}
+          {({ handleSubmit, values, errors }) => (
             <Box
-              as="button"
-              fontWeight="bold"
-              onClick={handleSwitchMode}
-              type="button"
+              as="form"
+              maxW="sm"
+              width={["90%", "xs"]}
+              borderRadius="lg"
+              p="4"
+              onSubmit={handleSubmit}
             >
-              {isSignUp ? "Sign In" : "Sign Up"}
-            </Box>
-            {isLoading ? (
-              <Box as="span" display="inline-block" pt="2" ml="3">
-                <Loader
-                  type="TailSpin"
-                  color="#000000"
-                  height={20}
-                  width={20}
-                />
+              {isSignUp ? (
+                <FormControl>
+                  <FormLabel> Name</FormLabel>
+                  <Input
+                    type="text"
+                    placeholder="Name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                  />
+                </FormControl>
+              ) : null}
+
+              <InputControl
+                name="email"
+                label="Email"
+                pt="2"
+                placeholder="Email"
+              />
+              <InputControl
+                name="password"
+                label="Password"
+                pt="2"
+                placeholder="Password"
+              />
+
+              {/*  <FormControl pt="2">
+                <FormLabel> Password</FormLabel>
+                <InputGroup>
+                  <Input
+                    type={showPassword ? "text" : "password"}
+                    placeholder="Password"
+                    name="password"
+                    value={formData.password}
+                    onChange={handleChange}
+                  />
+
+                  <InputRightAddon
+                    children={
+                      showPassword ? <MdVisibilityOff /> : <MdVisibility />
+                    }
+                    onClick={handlePasswordVisibility}
+                  />
+                </InputGroup>
+              </FormControl> */}
+
+              <SubmitButton mt="3" disabled={Object.keys(errors).length}>
+                {isSignUp ? "Sign Up" : "Sign In"}
+              </SubmitButton>
+
+              <Box as="p" mt="3" fontSize="sm">
+                {" "}
+                {isSignUp
+                  ? "Are you already a member?"
+                  : "Don't have an account yet?"}{" "}
+                <Box
+                  as="button"
+                  fontWeight="bold"
+                  onClick={handleSwitchMode}
+                  type="button"
+                >
+                  {isSignUp ? "Sign In" : "Sign Up"}
+                </Box>
+                {isLoading ? (
+                  <Box as="span" display="inline-block" pt="2" ml="3">
+                    <Loader
+                      type="TailSpin"
+                      color="#000000"
+                      height={20}
+                      width={20}
+                    />
+                  </Box>
+                ) : null}
               </Box>
-            ) : null}
-          </Box>
-        </Box>
+            </Box>
+          )}
+        </Formik>
       </Box>
     </div>
   );
