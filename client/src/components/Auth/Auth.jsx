@@ -1,9 +1,6 @@
 import { Button } from "@chakra-ui/button";
-import { FormControl, FormLabel } from "@chakra-ui/form-control";
-import { Input, InputGroup, InputRightAddon } from "@chakra-ui/input";
 import { Box } from "@chakra-ui/layout";
 import React, { useState } from "react";
-import { MdVisibility, MdVisibilityOff } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { signInStartAsync, signUpStartAsync } from "../redux/auth/userActions";
@@ -14,58 +11,37 @@ import { selectIsLoading } from "../redux/auth/userSelectors";
 import { Formik } from "formik";
 import * as Yup from "yup";
 
-import {
-  CheckboxContainer,
-  CheckboxControl,
-  CheckboxSingleControl,
-  InputControl,
-  NumberInputControl,
-  PercentComplete,
-  RadioGroupControl,
-  ResetButton,
-  SelectControl,
-  SliderControl,
-  SubmitButton,
-  SwitchControl,
-  TextareaControl,
-} from "formik-chakra-ui";
+import { InputControl } from "formik-chakra-ui";
 const Auth = () => {
   const dispatch = useDispatch();
   const toast = useToast();
   const isLoading = useSelector(selectIsLoading);
   const history = useHistory();
   const [isSignUp, setIsSignUp] = useState(true);
-  const [showPassword, setShowPassword] = useState(false);
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    password: "",
-  });
-  const handlePasswordVisibility = () => {
-    setShowPassword((prevState) => !prevState);
-  };
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-    console.log(formData);
-  };
-  const handleSubmit = (e) => {
-    e.preventDefault();
 
+  const handleSubmit = (values) => {
     if (isSignUp) {
-      dispatch(signUpStartAsync(formData, history));
+      dispatch(signUpStartAsync(values, history));
     } else {
-      dispatch(signInStartAsync(formData, history, toast));
+      dispatch(signInStartAsync(values, history, toast));
     }
   };
   const handleSwitchMode = () => {
     setIsSignUp(!isSignUp);
-    setFormData({ name: "", email: "", password: "" });
-    setShowPassword(false);
   };
   const handleBackClick = () => {
     history.push("/");
   };
   const validationSchema = Yup.object({
+    fullName: isSignUp
+      ? Yup.string()
+          .min(2, "Too Short!")
+          .max(50, "Too Long!")
+          .required("Required")
+          .test("invalid", "Must include first and last name", (name) =>
+            /^[a-zA-Z]+ [a-zA-Z]+/.test(name || "")
+          )
+      : Yup.string(),
     email: Yup.string()
       .trim()
       .min(2, "Too Short!")
@@ -78,9 +54,19 @@ const Auth = () => {
       .required("Required"),
   });
 
-  const initialValues = {
-    email: "",
-    password: "",
+  const getInitialValues = () => {
+    if (isSignUp) {
+      return {
+        fullName: "",
+        email: "",
+        password: "",
+      };
+    } else {
+      return {
+        email: "",
+        password: "",
+      };
+    }
   };
   return (
     <div>
@@ -105,11 +91,17 @@ const Auth = () => {
         </Box>
 
         <Formik
-          initialValues={initialValues}
+          initialValues={getInitialValues()}
           onSubmit={handleSubmit}
           validationSchema={validationSchema}
         >
-          {({ handleSubmit, values, errors }) => (
+          {({
+            handleSubmit,
+            values,
+            setFieldValue,
+            setFieldTouched,
+            errors,
+          }) => (
             <Box
               as="form"
               maxW="sm"
@@ -119,16 +111,12 @@ const Auth = () => {
               onSubmit={handleSubmit}
             >
               {isSignUp ? (
-                <FormControl>
-                  <FormLabel> Name</FormLabel>
-                  <Input
-                    type="text"
-                    placeholder="Name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                  />
-                </FormControl>
+                <InputControl
+                  name="fullName"
+                  label="Full Name"
+                  pt="2"
+                  placeholder="Full Name"
+                />
               ) : null}
 
               <InputControl
@@ -164,9 +152,14 @@ const Auth = () => {
                 </InputGroup>
               </FormControl> */}
 
-              <SubmitButton mt="3" disabled={Object.keys(errors).length}>
+              <Button
+                type="submit"
+                colorScheme="teal"
+                mt="3"
+                disabled={Object.keys(errors).length}
+              >
                 {isSignUp ? "Sign Up" : "Sign In"}
-              </SubmitButton>
+              </Button>
 
               <Box as="p" mt="3" fontSize="sm">
                 {" "}
@@ -176,7 +169,16 @@ const Auth = () => {
                 <Box
                   as="button"
                   fontWeight="bold"
-                  onClick={handleSwitchMode}
+                  onClick={() => {
+                    setFieldValue("fullName", "");
+                    setFieldValue("password", "");
+                    setFieldTouched("email", false);
+                    setFieldTouched("password", false);
+                    setFieldTouched("fullName", false);
+
+                    setFieldValue("email", "");
+                    handleSwitchMode();
+                  }}
                   type="button"
                 >
                   {isSignUp ? "Sign In" : "Sign Up"}
