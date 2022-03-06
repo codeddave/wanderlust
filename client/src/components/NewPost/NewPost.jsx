@@ -15,6 +15,7 @@ import {
   createPostStartAsync,
   updatePostStartAsync,
 } from "../redux/posts/postActions";
+import { GrFormClose } from "react-icons/gr";
 //create post
 const NewPost = ({ setCurrentId, currentId }) => {
   const posts = useSelector((state) => state.post.posts);
@@ -52,6 +53,15 @@ const NewPost = ({ setCurrentId, currentId }) => {
     });
     /*   ; */
   };
+  const handleCloseEdit = () => {
+    setCurrentId(null);
+    setPostData({
+      description: "",
+      selectedFile: "",
+      title: "",
+      tags: "",
+    });
+  };
   return (
     <div>
       <Box
@@ -64,12 +74,18 @@ const NewPost = ({ setCurrentId, currentId }) => {
         mb="20"
         as="form"
         onSubmit={handleSubmit}
+        position="relative"
       >
-        <Box as="p" textAlign="center">
+        <Box as="p" textAlign="center" fontWeight="bold">
           {currentId ? "Edit" : "Create"} a Memory{" "}
         </Box>
+        {currentId ? (
+          <Box position="absolute" right="0" onClick={handleCloseEdit}>
+            <GrFormClose />
+          </Box>
+        ) : null}
 
-        <FormControl id="title">
+        <FormControl id="title" mt="5">
           <FormLabel htmlFor="title">Title</FormLabel>
           <Input
             type="text"
