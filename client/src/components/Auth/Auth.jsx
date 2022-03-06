@@ -4,13 +4,16 @@ import { Input, InputGroup, InputRightAddon } from "@chakra-ui/input";
 import { Box } from "@chakra-ui/layout";
 import React, { useState } from "react";
 import { MdVisibility, MdVisibilityOff } from "react-icons/md";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { signInStartAsync, signUpStartAsync } from "../redux/auth/userActions";
 
 import { BiArrowBack } from "react-icons/bi";
+import Loader from "react-loader-spinner";
+import { selectIsLoading } from "../redux/auth/userSelectors";
 const Auth = () => {
   const dispatch = useDispatch();
+  const isLoading = useSelector(selectIsLoading);
   const history = useHistory();
   const [isSignUp, setIsSignUp] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
@@ -43,6 +46,7 @@ const Auth = () => {
   const handleBackClick = () => {
     history.push("/");
   };
+  console.log(isLoading);
   return (
     <div>
       <Box
@@ -61,6 +65,9 @@ const Auth = () => {
         justifyContent="center"
         alignItems="center"
       >
+        <Box as="p" textAlign="center" fontWeight="bold" fontSize="xl">
+          {isSignUp ? "Sign Up" : "Sign In"}
+        </Box>
         <Box
           as="form"
           maxW="sm"
@@ -119,9 +126,24 @@ const Auth = () => {
             {isSignUp
               ? "Are you already a member?"
               : "Don't have an account yet?"}{" "}
-            <Box as="button" onClick={handleSwitchMode} type="button">
+            <Box
+              as="button"
+              fontWeight="bold"
+              onClick={handleSwitchMode}
+              type="button"
+            >
               {isSignUp ? "Sign In" : "Sign Up"}
             </Box>
+            {isLoading ? (
+              <Box as="span" display="inline-block" pt="2" ml="3">
+                <Loader
+                  type="TailSpin"
+                  color="#000000"
+                  height={20}
+                  width={20}
+                />
+              </Box>
+            ) : null}
           </Box>
         </Box>
       </Box>
