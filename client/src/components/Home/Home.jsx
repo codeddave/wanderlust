@@ -43,7 +43,7 @@ function Home() {
         {user ? (
           <NewPost currentId={currentId} setCurrentId={setCurrentId} />
         ) : (
-          <Box as="p" marginY="40">
+          <Box as="p" marginY="40" textAlign="center">
             {" "}
             Please Sign In to create your memories.
           </Box>

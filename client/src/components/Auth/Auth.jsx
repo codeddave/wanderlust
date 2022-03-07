@@ -10,8 +10,8 @@ import Loader from "react-loader-spinner";
 import { selectIsLoading } from "../redux/auth/userSelectors";
 import { Formik } from "formik";
 import * as Yup from "yup";
-
 import { InputControl } from "formik-chakra-ui";
+
 const Auth = () => {
   const dispatch = useDispatch();
   const toast = useToast();
