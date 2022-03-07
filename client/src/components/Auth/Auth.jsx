@@ -37,7 +37,7 @@ const Auth = () => {
       ? Yup.string()
           .min(2, "Too Short!")
           .max(50, "Too Long!")
-          .required("Required")
+          .required("Please enter your full name")
           .test("invalid", "Must include first and last name", (name) =>
             /^[a-zA-Z]+ [a-zA-Z]+/.test(name || "")
           )
@@ -47,11 +47,11 @@ const Auth = () => {
       .min(2, "Too Short!")
       .max(50, "Too Long!")
       .email("Invalid email")
-      .required("Required"),
+      .required("Please enter your email"),
     password: Yup.string()
       .min(8, "Too Short!")
       .max(50, "Too Long!")
-      .required("Required"),
+      .required("Please enter a password"),
   });
 
   const getInitialValues = () => {
