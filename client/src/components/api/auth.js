@@ -22,14 +22,24 @@ export const signIn = async (userData, toast) => {
     const res = await axios.post(`${url}/user/signin`, userData);
     return res.data;
   } catch (error) {
-    toast({
-      title: error?.response?.data?.message,
-      status: "error",
-      position: "top",
-      duration: 3000,
-      isClosable: true,
-    });
-    console.log(error.response.data.message);
+    if (error.response.data.message) {
+      toast({
+        title: error.response.data.message,
+        status: "error",
+        position: "top",
+        duration: 3000,
+        isClosable: true,
+      });
+    } else {
+      toast({
+        title: "Something went wrong, please try again",
+        status: "error",
+        position: "top",
+        duration: 3000,
+        isClosable: true,
+      });
+      console.log(error.response.data.message);
+    }
   }
 };
 
