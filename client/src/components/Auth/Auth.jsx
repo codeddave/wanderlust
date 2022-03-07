@@ -21,7 +21,7 @@ const Auth = () => {
 
   const handleSubmit = (values) => {
     if (isSignUp) {
-      dispatch(signUpStartAsync(values, history));
+      dispatch(signUpStartAsync(values, history, toast));
     } else {
       dispatch(signInStartAsync(values, history, toast));
     }

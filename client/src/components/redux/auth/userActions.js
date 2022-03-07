@@ -46,11 +46,11 @@ export const getUserProfileDataFailure = (error) => ({
   payload: error,
 });
 
-export const signUpStartAsync = (user, history) => {
+export const signUpStartAsync = (user, history, toast) => {
   return async (dispatch) => {
     dispatch(signUpStart());
     try {
-      const userData = await signUp(user);
+      const userData = await signUp(user, toast);
       dispatch(signUpSuccess(userData));
       history.push("/");
     } catch (error) {

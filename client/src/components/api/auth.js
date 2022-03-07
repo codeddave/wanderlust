@@ -8,12 +8,29 @@ const token = localStorage.getItem("persist:root")
 
 axios.defaults.headers.common["Authorization"] = "Bearer " + token;
 
-export const signUp = async (userData) => {
+export const signUp = async (userData, toast) => {
   try {
     const res = await axios.post(`${url}/user/signup`, userData);
     return res.data;
   } catch (error) {
-    console.log(error.message);
+    if (error.response.data.message) {
+      toast({
+        title: error.response.data.message,
+        status: "error",
+        position: "top",
+        duration: 3000,
+        isClosable: true,
+      });
+    } else {
+      toast({
+        title: "Something went wrong, please try again",
+        status: "error",
+        position: "top",
+        duration: 3000,
+        isClosable: true,
+      });
+      console.log(error.response.data.message);
+    }
   }
 };
 
