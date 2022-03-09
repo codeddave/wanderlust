@@ -54,7 +54,7 @@ export const signUpStartAsync = (user, history, toast) => {
       dispatch(signUpSuccess(userData));
       history.push("/");
     } catch (error) {
-      dispatch(signUpFailure());
+      dispatch(signUpFailure(error));
     }
   };
 };
@@ -75,7 +75,7 @@ export const signInStartAsync = (user, history, toast) => {
         isClosable: true,
       });
     } catch (error) {
-      dispatch(signInFailure());
+      dispatch(signInFailure(error));
     }
   };
 };
@@ -87,7 +87,7 @@ export const getUserProfileDataStartAsync = () => {
       const userProfile = await getUserProfileDataApi();
       dispatch(getUserProfileDataSuccess(userProfile));
     } catch (error) {
-      dispatch(getUserProfileDataFailure());
+      dispatch(getUserProfileDataFailure(error));
     }
   };
 };
