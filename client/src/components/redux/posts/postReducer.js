@@ -28,6 +28,7 @@ export const postReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         posts: [...state.posts, action.payload],
+        isLoading: false,
       };
     case postActionTypes.UPDATE_POST:
       return {

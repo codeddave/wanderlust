@@ -13,9 +13,16 @@ export const getPosts = (posts) => ({
   payload: posts,
 });
 
-export const createPost = (post) => ({
-  type: postActionTypes.CREATE_POST,
+export const createPostStart = () => ({
+  type: postActionTypes.CREATE_POST_START,
+});
+export const createPostSuccess = (post) => ({
+  type: postActionTypes.CREATE_POST_SUCCESS,
   payload: post,
+});
+export const createPostFailure = (error) => ({
+  type: postActionTypes.CREATE_POST_FAILURE,
+  payload: error,
 });
 export const updatePost = (post) => ({
   type: postActionTypes.UPDATE_POST,
@@ -43,13 +50,19 @@ export const getPostsStartAsync = () => {
   };
 };
 
-export const createPostStartAsync = (post) => {
+export const createPostStartAsync = (post, toast) => {
   return async (dispatch) => {
+    dispatch(createPostStart());
     try {
       const postData = await createPostApi(post);
 
-      dispatch(createPost(postData));
+      dispatch(createPostSuccess(postData));
+      toast({
+        title: "Post created successfully!",
+        status: "success",
+      });
     } catch (error) {
+      dispatch(createPostFailure(error));
       console.log(error.message);
     }
   };
