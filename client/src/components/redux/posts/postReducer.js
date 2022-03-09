@@ -2,6 +2,8 @@ import { postActionTypes } from "./postActionTypes";
 
 const INITIAL_STATE = {
   posts: [],
+  isLoading: false,
+  error: null,
 };
 
 export const postReducer = (state = INITIAL_STATE, action) => {
@@ -11,7 +13,18 @@ export const postReducer = (state = INITIAL_STATE, action) => {
         ...state,
         posts: action.payload,
       };
-    case postActionTypes.CREATE_POST:
+    case postActionTypes.CREATE_POST_START:
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case postActionTypes.CREATE_POST_FAILURE:
+      return {
+        ...state,
+        error: action.payload,
+        isLoading: false,
+      };
+    case postActionTypes.CREATE_POST_SUCCESS:
       return {
         ...state,
         posts: [...state.posts, action.payload],
