@@ -7,6 +7,7 @@ import {
   //FormHelperText,
   Textarea,
   Button,
+  useToast,
 } from "@chakra-ui/react";
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,11 +17,15 @@ import {
   updatePostStartAsync,
 } from "../redux/posts/postActions";
 import { GrFormClose } from "react-icons/gr";
+import { selectIsLoadingPosts } from "../redux/posts/postSelectors";
+import Loader from "react-loader-spinner";
 //create post
 const NewPost = ({ setCurrentId, currentId }) => {
+  const toast = useToast();
   const posts = useSelector((state) => state.post.posts);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
+  const createPostLoading = useSelector(selectIsLoadingPosts);
 
   //console.log(currentId);
   const postToUpdate = currentId
@@ -42,7 +47,7 @@ const NewPost = ({ setCurrentId, currentId }) => {
     if (currentId) {
       dispatch(updatePostStartAsync(currentId, postData));
     } else {
-      dispatch(createPostStartAsync({ ...postData, name: user.name }));
+      dispatch(createPostStartAsync({ ...postData, name: user.name }, toast));
     }
     setCurrentId(null);
     setPostData({
@@ -131,9 +136,15 @@ const NewPost = ({ setCurrentId, currentId }) => {
             }
           />
         </Box>
-        <Button colorScheme="teal" mt="4" type="submit">
-          Submit
-        </Button>
+        <Box mt="4" display="flex" alignItems="center">
+          <Button colorScheme="teal" type="submit" mr="2">
+            Submit
+          </Button>
+
+          {createPostLoading ? (
+            <Loader type="TailSpin" color="#000000" height={20} width={20} />
+          ) : null}
+        </Box>
       </Box>
     </div>
   );
